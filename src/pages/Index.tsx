@@ -7,10 +7,17 @@ import InstagramFeed from "@/components/InstagramFeed";
 import Blog from "@/components/Blog";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SEO } from "@/components/SEO";
+import { PersonSchema, OrganizationSchema } from "@/components/SchemaMarkup";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SEO />
+      <PersonSchema />
+      <OrganizationSchema />
+      
       <Navbar />
       <Hero />
       <About />
@@ -20,6 +27,8 @@ const Index = () => {
       <Blog />
       <Testimonials />
       <Footer />
+      
+      <WhatsAppButton />
     </div>
   );
 };

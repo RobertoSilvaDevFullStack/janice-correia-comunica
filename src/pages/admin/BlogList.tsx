@@ -1,0 +1,97 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { blogArticles } from '@/data/blogArticles';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Search, Plus, Edit, Eye } from 'lucide-react';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
+const BlogList = () => {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+
+  const filteredArticles = blogArticles.filter(article =>
+    article.title.toLowerCase().includes(search.toLowerCase()) ||
+    article.category.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-serif font-bold text-primary mb-2">Blog</h1>
+          <p className="text-muted-foreground">Gerencie seus artigos</p>
+        </div>
+        <Button onClick={() => navigate('/admin/blog/new')} className="btn-gradient">
+          <Plus className="mr-2 h-4 w-4" />
+          Novo Artigo
+        </Button>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar artigos..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {filteredArticles.length === 0 ? (
+              <p className="text-muted-foreground text-center py-8">Nenhum artigo encontrado</p>
+            ) : (
+              filteredArticles.map((article) => (
+                <div key={article.slug} className="flex items-center gap-4 p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-24 h-24 object-cover rounded-lg"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-semibold text-primary text-lg">{article.title}</h3>
+                      <Badge variant="outline">{article.category}</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
+                      {article.excerpt}
+                    </p>
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <span>{format(new Date(article.publishedAt), "dd 'de' MMM, yyyy", { locale: ptBR })}</span>
+                      <span>{article.readTime}</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => navigate(`/blog/${article.slug}`)}
+                    >
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => navigate(`/admin/blog/edit/${article.slug}`)}
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default BlogList;

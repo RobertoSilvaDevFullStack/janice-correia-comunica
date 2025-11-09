@@ -48,3 +48,14 @@ export const getCurrentUser = (): User | null => {
 export const isAuthenticated = (): boolean => {
   return !!localStorage.getItem('authToken');
 };
+
+export const useAuth = () => {
+  const token = localStorage.getItem('authToken');
+  const user = getCurrentUser();
+  
+  return {
+    isAuthenticated: !!token,
+    user,
+    isLoading: false,
+  };
+};

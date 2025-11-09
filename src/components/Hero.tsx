@@ -1,12 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useContactModal } from "@/hooks/useContactModal";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const { openModal } = useContactModal();
 
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20">
@@ -32,7 +30,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
-              onClick={() => scrollToSection("#palestras")}
+              onClick={() => openModal('palestras')}
               size="lg"
               className="btn-gradient text-primary-foreground font-semibold"
             >
@@ -40,7 +38,7 @@ const Hero = () => {
               <ArrowRight className="ml-2" size={20} />
             </Button>
             <Button
-              onClick={() => scrollToSection("#mentorias")}
+              onClick={() => openModal('mentorias')}
               size="lg"
               variant="outline"
               className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm"

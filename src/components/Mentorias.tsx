@@ -5,10 +5,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useContactModal } from "@/hooks/useContactModal";
 import mentoriaImage from "@/assets/mentoria.jpg";
 
 const Mentorias = () => {
   const { toast } = useToast();
+  const { openModal } = useContactModal();
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -102,6 +104,13 @@ const Mentorias = () => {
                 </li>
               ))}
             </ul>
+            <Button 
+              onClick={() => openModal('mentorias')} 
+              size="lg" 
+              className="w-full mt-8 btn-gradient"
+            >
+              Quero Saber Mais
+            </Button>
           </div>
 
           <div className="space-y-6">

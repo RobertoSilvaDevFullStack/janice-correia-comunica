@@ -1,9 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Mail } from "lucide-react";
+import { useContactModal } from "@/hooks/useContactModal";
 
 const Blog = () => {
+  const { openModal } = useContactModal();
+  
   const articles = [
     {
       title: "5 Técnicas de Oratória que Todo Líder Deveria Dominar",
@@ -106,11 +109,18 @@ const Blog = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            Ver Todos os Artigos
+        <Card className="mt-16 max-w-3xl mx-auto text-center p-8 shadow-soft bg-gradient-to-br from-primary/5 to-accent/5">
+          <h3 className="font-serif text-2xl md:text-3xl font-bold text-primary mb-4">
+            Receba Conteúdos Exclusivos
+          </h3>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            Inscreva-se na nossa newsletter e receba insights valiosos sobre comunicação corporativa direto no seu e-mail
+          </p>
+          <Button onClick={() => openModal('newsletter')} size="lg" className="btn-gradient">
+            <Mail className="mr-2" size={20} />
+            Quero Receber
           </Button>
-        </div>
+        </Card>
       </div>
     </section>
   );

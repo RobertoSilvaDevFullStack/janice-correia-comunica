@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageSquare, Users, Target, Sparkles } from "lucide-react";
+import { useContactModal } from "@/hooks/useContactModal";
 import palestra1 from "@/assets/palestra-1.jpg";
 import palestra2 from "@/assets/palestra-2.jpg";
 
 const Palestras = () => {
+  const { openModal } = useContactModal();
+  
   const palestras = [
     {
       title: "Comunicação Assertiva no Ambiente Corporativo",
@@ -39,11 +42,6 @@ const Palestras = () => {
       topics: ["Gestão de crise", "Comunicação transparente", "Liderança em momentos críticos"],
     },
   ];
-
-  const scrollToContact = () => {
-    const element = document.querySelector("#contato");
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section id="palestras" className="py-20 bg-background">
@@ -94,7 +92,7 @@ const Palestras = () => {
                     ))}
                   </ul>
                 </div>
-                <Button onClick={scrollToContact} variant="default" className="w-full">
+                <Button onClick={() => openModal('palestras')} variant="default" className="w-full">
                   Solicitar Palestra
                 </Button>
               </CardContent>
@@ -106,7 +104,7 @@ const Palestras = () => {
           <p className="text-muted-foreground mb-4">
             Palestras customizadas para atender as necessidades específicas da sua empresa
           </p>
-          <Button onClick={scrollToContact} size="lg" variant="outline">
+          <Button onClick={() => openModal('palestras')} size="lg" variant="outline">
             Fale Conosco
           </Button>
         </div>

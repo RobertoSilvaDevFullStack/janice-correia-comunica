@@ -15,6 +15,7 @@ import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import LeadsList from "./pages/admin/LeadsList";
 import BlogList from "./pages/admin/BlogList";
+import BlogPostForm from "./pages/admin/BlogPostForm";
 import TestimonialsList from "./pages/admin/TestimonialsList";
 import PalestrasList from "./pages/admin/PalestrasList";
 import MentoriasList from "./pages/admin/MentoriasList";
@@ -42,6 +43,8 @@ const App = () => (
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="leads" element={<LeadsList />} />
                 <Route path="blog" element={<BlogList />} />
+                <Route path="blog/new" element={<BlogPostForm />} />
+                <Route path="blog/edit/:slug" element={<BlogPostForm />} />
                 <Route path="testimonials" element={<TestimonialsList />} />
                 <Route path="palestras" element={<PalestrasList />} />
                 <Route path="mentorias" element={<MentoriasList />} />

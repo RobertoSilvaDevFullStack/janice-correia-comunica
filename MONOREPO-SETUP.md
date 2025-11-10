@@ -55,17 +55,19 @@ npm run dev
 **Frontend (`.env` na raiz):**
 ```
 VITE_API_URL=http://localhost:3001/api
-VITE_WHATSAPP_NUMBER=5511999999999
 ```
 
 **Backend (`api/.env`):**
 ```
 DATABASE_URL=postgresql://postgres:DRuPZFnOPNrVryMMlkMmqiOBxjdkZyXv@postgres.railway.internal:5432/railway
-JWT_SECRET=seu_jwt_secret_aqui
+JWT_SECRET=seu_jwt_secret_com_pelo_menos_32_caracteres
+JWT_EXPIRES_IN=24h
 PORT=3001
 NODE_ENV=development
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:8080
 ```
+
+⚠️ **IMPORTANTE:** O JWT_SECRET deve ter pelo menos 32 caracteres para segurança!
 
 ## 🗄️ Banco de Dados
 
@@ -114,7 +116,7 @@ cd api
 npm run dev
 ```
 
-Frontend: http://localhost:5173
+Frontend: http://localhost:8080 (configurado em vite.config.ts)
 Backend API: http://localhost:3001
 
 ## 📦 Deploy

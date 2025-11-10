@@ -24,7 +24,11 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role },
+      { 
+        userId: user.id, 
+        email: user.email,
+        role: user.role || 'user' // Inclui a role no token JWT
+      },
       process.env.JWT_SECRET!,
       { expiresIn: '24h' }
     );
@@ -34,8 +38,9 @@ export const login = async (req: Request, res: Response) => {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name,
-        role: user.role,
+        name: user.full_name,
+        is_active: user.is_active,
+        role: user.role || 'user' // Inclui a role na resposta
       },
     });
   } catch (error) {
@@ -60,8 +65,8 @@ export const register = async (req: Request, res: Response) => {
     const passwordHash = await bcrypt.hash(password, 10);
 
     const result = await pool.query(
-      'INSERT INTO users (email, password_hash, name, role) VALUES ($1, $2, $3, $4) RETURNING id, email, name, role',
-      [email, passwordHash, name, 'admin']
+      'INSERT INTO users (email, password_hash, full_name, is_active) VALUES ($1, $2, $3, $4) RETURNING id, email, full_name, is_active',
+      [email, passwordHash, name, true]
     );
 
     res.status(201).json({

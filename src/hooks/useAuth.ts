@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 
 interface LoginCredentials {
@@ -19,16 +20,28 @@ interface LoginResponse {
 }
 
 export const useLogin = () => {
-  return useMutation({
-    mutationFn: async (credentials: LoginCredentials) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const login = async (credentials: LoginCredentials) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
       const { data } = await api.post<LoginResponse>('/auth/login', credentials);
-      return data;
-    },
-    onSuccess: (data) => {
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
-    },
-  });
+      return data;
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || 'Erro ao fazer login. Verifique suas credenciais.';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { login, isLoading, error };
 };
 
 export const useLogout = () => {
@@ -50,12 +63,22 @@ export const isAuthenticated = (): boolean => {
 };
 
 export const useAuth = () => {
-  const token = localStorage.getItem('authToken');
-  const user = getCurrentUser();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const userData = getCurrentUser();
+    
+    setIsAuthenticated(!!token);
+    setUser(userData);
+    setIsLoading(false);
+  }, []);
   
   return {
-    isAuthenticated: !!token,
+    isAuthenticated,
     user,
-    isLoading: false,
+    isLoading,
   };
 };

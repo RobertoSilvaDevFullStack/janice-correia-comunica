@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,8 +20,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
-  const login = useLogin();
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, isLoading, error } = useLogin();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -32,17 +31,22 @@ const Login = () => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    setIsLoading(true);
     try {
-      await login.mutateAsync({ email: data.email, password: data.password });
+      await login({ email: data.email, password: data.password });
       toast.success('Login realizado com sucesso!');
       navigate('/admin/dashboard');
     } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Erro ao fazer login. Verifique suas credenciais.');
-    } finally {
-      setIsLoading(false);
+      // O erro já é tratado no hook useLogin
+      toast.error(error.message);
     }
   };
+
+  // Exibir erro se houver
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-accent/5 p-4">

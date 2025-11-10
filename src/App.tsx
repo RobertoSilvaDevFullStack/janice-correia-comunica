@@ -19,6 +19,7 @@ import BlogPostForm from "./pages/admin/BlogPostForm";
 import TestimonialsList from "./pages/admin/TestimonialsList";
 import TestimonialForm from "./pages/admin/TestimonialForm";
 import PalestrasList from "./pages/admin/PalestrasList";
+import PalestraForm from "./pages/admin/PalestraForm";
 import MentoriasList from "./pages/admin/MentoriasList";
 import Settings from "./pages/admin/Settings";
 import MediaLibrary from "./pages/admin/MediaLibrary";
@@ -50,6 +51,8 @@ const App = () => (
                 <Route path="testimonials/new" element={<TestimonialForm />} />
                 <Route path="testimonials/edit/:id" element={<TestimonialForm />} />
                 <Route path="palestras" element={<PalestrasList />} />
+                <Route path="palestras/new" element={<PalestraForm />} />
+                <Route path="palestras/edit/:id" element={<PalestraForm />} />
                 <Route path="mentorias" element={<MentoriasList />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="media" element={<MediaLibrary />} />

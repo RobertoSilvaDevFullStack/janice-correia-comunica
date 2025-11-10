@@ -73,11 +73,13 @@ CREATE INDEX IF NOT EXISTS idx_testimonials_status ON testimonials(status);
 CREATE INDEX IF NOT EXISTS idx_testimonials_display_order ON testimonials(display_order);
 
 -- Inserir usuário admin padrão (senha: Admin@123)
--- Você DEVE mudar esta senha em produção!
+-- ⚠️ IMPORTANTE: Mude esta senha em produção!
+-- Email: admin@janicecorreia.com
+-- Senha: Admin@123
 INSERT INTO users (email, password_hash, name, role)
 VALUES (
   'admin@janicecorreia.com',
-  '$2b$10$YourHashedPasswordHere',
+  '$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
   'Administrador',
   'admin'
 ) ON CONFLICT (email) DO NOTHING;

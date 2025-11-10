@@ -25,6 +25,17 @@ export const useTestimonials = () => {
   });
 };
 
+export const useTestimonial = (id: string) => {
+  return useQuery({
+    queryKey: ['testimonial', id],
+    queryFn: async () => {
+      const { data } = await api.get<Testimonial>(`/testimonials/${id}`);
+      return data;
+    },
+    enabled: !!id,
+  });
+};
+
 export const useCreateTestimonial = () => {
   const queryClient = useQueryClient();
 

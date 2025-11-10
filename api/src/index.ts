@@ -7,6 +7,8 @@ import authRoutes from './routes/auth.routes';
 import blogRoutes from './routes/blog.routes';
 import leadsRoutes from './routes/leads.routes';
 import testimonialsRoutes from './routes/testimonials.routes';
+import palestrasRoutes from './routes/palestras.routes';
+import mentoriasRoutes from './routes/mentorias.routes';
 
 dotenv.config();
 
@@ -44,6 +46,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/leads', leadsRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
+app.use('/api/palestras', palestrasRoutes);
+app.use('/api/mentorias', mentoriasRoutes);
 
 // 404 handler
 app.use((req, res) => {

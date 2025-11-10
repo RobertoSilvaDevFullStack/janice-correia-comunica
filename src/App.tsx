@@ -21,6 +21,7 @@ import TestimonialForm from "./pages/admin/TestimonialForm";
 import PalestrasList from "./pages/admin/PalestrasList";
 import PalestraForm from "./pages/admin/PalestraForm";
 import MentoriasList from "./pages/admin/MentoriasList";
+import MentoriaForm from "./pages/admin/MentoriaForm";
 import Settings from "./pages/admin/Settings";
 import MediaLibrary from "./pages/admin/MediaLibrary";
 
@@ -54,6 +55,8 @@ const App = () => (
                 <Route path="palestras/new" element={<PalestraForm />} />
                 <Route path="palestras/edit/:id" element={<PalestraForm />} />
                 <Route path="mentorias" element={<MentoriasList />} />
+                <Route path="mentorias/new" element={<MentoriaForm />} />
+                <Route path="mentorias/edit/:id" element={<MentoriaForm />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="media" element={<MediaLibrary />} />
               </Route>

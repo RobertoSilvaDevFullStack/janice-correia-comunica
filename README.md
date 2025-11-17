@@ -82,6 +82,23 @@ Banco:
 SSL e Domínio:
 - Configurar domínio no EasyPanel e ativar SSL (ou Certbot)
 
+### Passo a passo no EasyPanel
+- Criar projeto (ou usar existente) para o banco: garantir serviço Postgres `janice_db` ativo
+- Criar serviço “Aplicativo” para API:
+  - Contexto: diretório `api/`
+  - Build: `npm ci && npm run build`
+  - Start: `node dist/index.js`
+  - Porta interna: `3001`
+  - Variáveis: `PORT=3001`, `JWT_SECRET`, `FRONTEND_URL`, `DATABASE_URL=postgresql://postgres:<SENHA>@janice_db:5432/janice_correia`
+  - Healthcheck: `GET /health`
+- Criar serviço “Aplicativo” para o frontend:
+  - Contexto: diretório `janice-correia-comunica/`
+  - Build: `npm ci && npm run build`
+  - Start: `npx serve -s dist -l 3000`
+  - Porta interna: `3000`
+  - Variáveis: `VITE_API_URL=https://seu-dominio/api`
+- Domínios: apontar o domínio para o serviço do frontend e ativar SSL
+
 ## Segurança
 - JWT em headers para rotas protegidas
 - Helmet, Rate Limiting, CORS restrito

@@ -13,6 +13,9 @@ const Hero = () => {
           src={heroImage}
           alt="Janice Correia - Comunicação Corporativa"
           className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
       </div>

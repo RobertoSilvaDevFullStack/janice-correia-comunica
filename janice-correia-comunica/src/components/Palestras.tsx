@@ -63,6 +63,8 @@ const Palestras = () => {
                   src={palestra.image}
                   alt={palestra.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute top-4 right-4 bg-accent text-accent-foreground p-3 rounded-full">
                   <palestra.icon size={24} />

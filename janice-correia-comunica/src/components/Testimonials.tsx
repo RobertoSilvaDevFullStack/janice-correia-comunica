@@ -89,7 +89,7 @@ const Testimonials = () => {
                 </p>
                 <div className="border-t border-border pt-4 flex items-center gap-4">
                   <Avatar className="h-12 w-12">
-                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} loading="lazy" decoding="async" />
                     <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                       {getInitials(testimonial.name)}
                     </AvatarFallback>

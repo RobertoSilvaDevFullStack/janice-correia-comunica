@@ -8,6 +8,13 @@ import { ptBR } from 'date-fns/locale';
 
 const Dashboard = () => {
   const { data: leads } = useLeads();
+  const [statsReal, setStatsReal] = React.useState<{leadsMonth:number; blogPosts:number; testimonials:number; views?:number}>({leadsMonth:0, blogPosts:0, testimonials:0, views:0});
+  React.useEffect(() => {
+    fetch((import.meta.env.VITE_API_URL || 'http://localhost:3001/api') + '/admin/stats', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('authToken') || ''}` },
+      credentials: 'include'
+    }).then(r => r.json()).then(setStatsReal).catch(() => {});
+  }, []);
 
   const stats = {
     leadsMonth: leads?.filter(l => {
@@ -15,9 +22,9 @@ const Dashboard = () => {
       const now = new Date();
       return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
     }).length || 0,
-    blogPosts: 6,
-    testimonials: 6,
-    views: 1247,
+    blogPosts: statsReal.blogPosts,
+    testimonials: statsReal.testimonials,
+    views: statsReal.views || 0,
   };
 
   const recentLeads = leads?.slice(0, 5) || [];

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Quote, Star, Target } from "lucide-react";
 import { useContactModal } from "@/hooks/useContactModal";
+import { useTestimonials } from "@/hooks/useTestimonials";
 
 const Testimonials = () => {
   const { openModal } = useContactModal();
@@ -11,56 +12,7 @@ const Testimonials = () => {
     return name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
   };
 
-  const testimonials = [
-    {
-      name: "Carlos Eduardo Silva",
-      role: "CEO, Engelux",
-      company: "Engelux",
-      content: "A palestra da Janice transformou completamente a forma como nossa equipe se comunica. Os resultados foram imediatos: mais clareza nas reuniões, menos conflitos e maior produtividade. Uma investimento que valeu cada centavo!",
-      rating: 5,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
-    },
-    {
-      name: "Ana Paula Mendes",
-      role: "Diretora de RH, Plano e Plano",
-      company: "Plano e Plano",
-      content: "Contratamos a Janice para um treinamento in-company e superou todas as expectativas. Ela tem uma didática excepcional e consegue engajar até os mais tímidos. Recomendo sem ressalvas!",
-      rating: 5,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana",
-    },
-    {
-      name: "Dr. Ricardo Almeida",
-      role: "Sócio-fundador, Elilon Advocacia",
-      company: "Elilon Advocacia",
-      content: "Como advogados, precisamos nos comunicar com clareza e persuasão. O programa de mentoria da Janice aprimorou nossas habilidades de oratória e nos deu ferramentas valiosas para apresentações mais impactantes.",
-      rating: 5,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ricardo",
-    },
-    {
-      name: "Mariana Costa",
-      role: "Gerente de Marketing",
-      company: "Tech Solutions",
-      content: "A mentoria individual foi um divisor de águas na minha carreira. Aprendi a me posicionar com segurança em reuniões e apresentações. A Janice é uma profissional excepcional!",
-      rating: 5,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mariana",
-    },
-    {
-      name: "João Pedro Santos",
-      role: "Diretor Comercial",
-      company: "Distribuidora Nacional",
-      content: "As palestras da Janice sobre comunicação com clientes transformaram nosso atendimento. Tivemos um aumento de 30% na satisfação dos clientes em apenas 3 meses.",
-      rating: 5,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Joao",
-    },
-    {
-      name: "Fernanda Lima",
-      role: "Coordenadora de Treinamento",
-      company: "Grupo Empresarial ABC",
-      content: "Já trouxemos a Janice para 3 eventos diferentes e em todos ela foi um sucesso absoluto. Conteúdo de qualidade, entrega impecável e feedbacks sempre muito positivos!",
-      rating: 5,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Fernanda",
-    },
-  ];
+  const { data: testimonials } = useTestimonials();
 
   return (
     <section id="depoimentos" className="py-20 bg-secondary/30">
@@ -75,7 +27,7 @@ const Testimonials = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {(testimonials || []).map((testimonial, index) => (
             <Card key={index} className="relative card-hover">
               <CardContent className="pt-6">
                 <Quote className="w-10 h-10 text-accent/20 mb-4" />

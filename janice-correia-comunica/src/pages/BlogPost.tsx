@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
-import { blogArticles } from '@/data/blogArticles';
+import { useBlogPost } from '@/hooks/useBlogPosts';
 import { SEO } from '@/components/SEO';
 import { ArticleSchema } from '@/components/SchemaMarkup';
 import Navbar from '@/components/Navbar';
@@ -11,7 +11,7 @@ import { Separator } from '@/components/ui/separator';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const article = blogArticles.find((a) => a.slug === slug);
+  const { data: article } = useBlogPost(slug!);
 
   if (!article) {
     return (
@@ -51,19 +51,19 @@ const BlogPost = () => {
     <div className="min-h-screen flex flex-col">
       <SEO
         title={article.title}
-        description={article.metaDescription}
-        keywords={article.keywords.join(', ')}
+        description={article.meta_description}
+        keywords={(article.keywords || []).join(', ')}
         image={article.image}
         url={`/blog/${article.slug}`}
         type="article"
-        publishedTime={article.publishedAt}
+        publishedTime={article.published_at}
       />
       <ArticleSchema
         headline={article.title}
-        description={article.metaDescription}
+        description={article.meta_description}
         image={article.image}
-        datePublished={article.publishedAt}
-        author={article.author}
+        datePublished={article.published_at}
+        author={"Janice Correia"}
         url={`https://janicecorreia.com.br/blog/${article.slug}`}
       />
       
@@ -98,8 +98,8 @@ const BlogPost = () => {
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <time dateTime={article.publishedAt}>
-                    {new Date(article.publishedAt).toLocaleDateString('pt-BR', {
+                  <time dateTime={article.published_at}>
+                    {new Date(article.published_at).toLocaleDateString('pt-BR', {
                       day: '2-digit',
                       month: 'long',
                       year: 'numeric',
@@ -108,7 +108,7 @@ const BlogPost = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span>{article.readTime} de leitura</span>
+                  <span>{Math.max(3, Math.round((article.content || '').replace(/<[^>]*>/g,' ').split(/\s+/).length/200))} min de leitura</span>
                 </div>
                 <Button
                   variant="ghost"
@@ -150,10 +150,7 @@ const BlogPost = () => {
           <div className="mt-16">
             <h2 className="text-2xl font-bold mb-6">Artigos Relacionados</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {blogArticles
-                .filter((a) => a.slug !== article.slug && a.category === article.category)
-                .slice(0, 2)
-                .map((related) => (
+              {(Array.isArray((article as any).related) ? (article as any).related : []).slice(0,2).map((related: any) => (
                   <Link
                     key={related.id}
                     to={`/blog/${related.slug}`}

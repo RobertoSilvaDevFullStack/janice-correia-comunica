@@ -6,7 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useContactModal } from "@/hooks/useContactModal";
-import mentoriaImage from "@/assets/mentoria.jpg";
+import { useMentorias } from "@/hooks/useMentorias";
 
 const Mentorias = () => {
   const { toast } = useToast();
@@ -27,26 +27,7 @@ const Mentorias = () => {
     "Materiais exclusivos e suporte pós-mentoria",
   ];
 
-  const programas = [
-    {
-      title: "Mentoria Individual em Oratória",
-      description: "Programa personalizado para desenvolver suas habilidades de apresentação e comunicação em público.",
-      duracao: "3 meses",
-      formato: "8 sessões de 1h30 (online ou presencial)",
-    },
-    {
-      title: "Treinamento Corporativo em Comunicação",
-      description: "Programa in-company para equipes que desejam melhorar sua comunicação interna e externa.",
-      duracao: "Customizável",
-      formato: "Presencial ou online",
-    },
-    {
-      title: "Preparação para Apresentações Importantes",
-      description: "Sessões intensivas para preparar apresentações cruciais, como pitches, reuniões estratégicas ou eventos.",
-      duracao: "1 a 4 semanas",
-      formato: "Sessões focadas e práticas",
-    },
-  ];
+  const { data: mentorias } = useMentorias();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,11 +69,8 @@ const Mentorias = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <div>
-            <img
-              src={mentoriaImage}
-              alt="Mentoria em Comunicação"
-              className="w-full h-auto rounded-lg shadow-medium mb-8"
-            />
+            {/* Imagem ilustrativa pode ser mantida ou substituída por capa da mentoria */}
+            {/* <img src={algumaImagem} alt="Mentoria" className="w-full h-auto rounded-lg shadow-medium mb-8" /> */}
             <h3 className="font-serif text-2xl font-bold text-primary mb-6">
               Nossos Diferenciais
             </h3>
@@ -117,7 +95,7 @@ const Mentorias = () => {
             <h3 className="font-serif text-2xl font-bold text-primary mb-6">
               Programas Disponíveis
             </h3>
-            {programas.map((programa, index) => (
+            {(mentorias || []).map((programa, index) => (
               <Card key={index} className="card-hover">
                 <CardHeader>
                   <CardTitle className="font-serif text-xl text-primary">
@@ -128,10 +106,10 @@ const Mentorias = () => {
                 <CardContent>
                   <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
                     <div>
-                      <span className="font-semibold text-primary">Duração:</span> {programa.duracao}
+                      <span className="font-semibold text-primary">Duração:</span> {programa.duration}
                     </div>
                     <div>
-                      <span className="font-semibold text-primary">Formato:</span> {programa.formato}
+                      <span className="font-semibold text-primary">Formato:</span> {programa.format}
                     </div>
                   </div>
                 </CardContent>

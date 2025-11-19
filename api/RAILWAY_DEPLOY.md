@@ -23,7 +23,7 @@ NODE_ENV=production
 ### CORS Configuration
 ```
 # URL do frontend (atualize com a URL do seu deploy)
-FRONTEND_URL=https://seu-projeto.lovable.app
+FRONTEND_URL=https://seu-dominio-frontend
 ```
 
 ## Comandos para Gerar JWT Secret:

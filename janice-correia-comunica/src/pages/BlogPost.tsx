@@ -150,7 +150,7 @@ const BlogPost = () => {
           <div className="mt-16">
             <h2 className="text-2xl font-bold mb-6">Artigos Relacionados</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {(Array.isArray((article as any).related) ? (article as any).related : []).slice(0,2).map((related: any) => (
+              {[] as any[] /* placeholder: lista de relacionados pode ser implementada futuramente */}
                   <Link
                     key={related.id}
                     to={`/blog/${related.slug}`}

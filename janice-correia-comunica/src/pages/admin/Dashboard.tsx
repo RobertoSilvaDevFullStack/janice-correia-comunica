@@ -5,15 +5,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import React from 'react';
 
 const Dashboard = () => {
   const { data: leads } = useLeads();
-  const [statsReal, setStatsReal] = React.useState<{leadsMonth:number; blogPosts:number; testimonials:number; views?:number}>({leadsMonth:0, blogPosts:0, testimonials:0, views:0});
+  type Stats = { leadsMonth: number; blogPosts: number; testimonials: number; views?: number };
+  const [statsReal, setStatsReal] = React.useState<Stats>({leadsMonth:0, blogPosts:0, testimonials:0, views:0});
   React.useEffect(() => {
     fetch((import.meta.env.VITE_API_URL || 'http://localhost:3001/api') + '/admin/stats', {
       headers: { Authorization: `Bearer ${localStorage.getItem('authToken') || ''}` },
       credentials: 'include'
-    }).then(r => r.json()).then(setStatsReal).catch(() => {});
+    }).then(r => r.json() as Promise<Stats>).then(setStatsReal).catch(() => {});
   }, []);
 
   const stats = {

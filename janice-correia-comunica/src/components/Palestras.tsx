@@ -21,7 +21,7 @@ const Palestras = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {palestras.map((palestra, index) => (
+          {(palestras || []).map((palestra, index) => (
             <Card key={index} className="overflow-hidden card-hover">
               <div className="relative h-48 overflow-hidden">
                 <img
@@ -32,7 +32,7 @@ const Palestras = () => {
                   decoding="async"
                 />
                 <div className="absolute top-4 right-4 bg-accent text-accent-foreground p-3 rounded-full">
-                  <palestra.icon size={24} />
+                  <MessageSquare size={24} />
                 </div>
               </div>
               <CardHeader>

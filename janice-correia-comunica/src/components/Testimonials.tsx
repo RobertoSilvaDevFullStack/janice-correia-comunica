@@ -48,7 +48,7 @@ const Testimonials = () => {
                   </Avatar>
                   <div>
                     <p className="font-semibold text-primary">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.position}</p>
                     <p className="text-sm text-accent font-medium mt-1">{testimonial.company}</p>
                   </div>
                 </div>

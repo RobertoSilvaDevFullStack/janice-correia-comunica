@@ -230,11 +230,10 @@ const BlogPostForm = () => {
               </div>
 
               <div>
-                <Label htmlFor="image">URL da Imagem de Capa *</Label>
-                <Input
-                  id="image"
-                  {...register('image')}
-                  placeholder="https://exemplo.com/imagem.jpg"
+                <Label>Imagem de Capa *</Label>
+                <ImageUploader
+                  value={watch('image')}
+                  onChange={(url)=> setValue('image', url)}
                 />
                 {errors.image && (
                   <p className="text-sm text-destructive mt-1">{errors.image.message}</p>
@@ -334,3 +333,4 @@ const BlogPostForm = () => {
 };
 
 export default BlogPostForm;
+import { ImageUploader } from '@/components/admin/ImageUploader';

@@ -149,27 +149,11 @@ const TestimonialForm = () => {
             </div>
 
             <div>
-              <Label htmlFor="avatar">URL do Avatar *</Label>
-              <Input
-                id="avatar"
-                {...register('avatar')}
-                placeholder="https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos"
-              />
+              <Label>Avatar *</Label>
+              <ImageUploader value={watch('avatar')} onChange={(url)=> setValue('avatar', url)} />
               {errors.avatar && (
                 <p className="text-sm text-destructive mt-1">{errors.avatar.message}</p>
               )}
-              <p className="text-xs text-muted-foreground mt-1">
-                Dica: Use{' '}
-                <a
-                  href="https://www.dicebear.com/playground?style=avataaars"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary underline"
-                >
-                  DiceBear Avataaars
-                </a>
-                {' '}para gerar avatares personalizados
-              </p>
             </div>
 
             <div>
@@ -267,3 +251,4 @@ const TestimonialForm = () => {
 };
 
 export default TestimonialForm;
+import { ImageUploader } from '@/components/admin/ImageUploader';

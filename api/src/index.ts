@@ -10,6 +10,9 @@ import testimonialsRoutes from "./routes/testimonials.routes";
 import palestrasRoutes from "./routes/palestras.routes";
 import mentoriasRoutes from "./routes/mentorias.routes";
 import adminRoutes from "./routes/admin.routes";
+import mediaRoutes from "./routes/media.routes";
+import path from "path";
+import fs from "fs";
 
 dotenv.config();
 
@@ -91,6 +94,12 @@ app.use("/api/testimonials", testimonialsRoutes);
 app.use("/api/palestras", palestrasRoutes);
 app.use("/api/mentorias", mentoriasRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/media", mediaRoutes);
+
+// Static serving of uploads
+const uploadsDir = path.join(__dirname, "..", "uploads");
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+app.use("/uploads", express.static(uploadsDir));
 
 // 404 handler
 app.use((req, res) => {

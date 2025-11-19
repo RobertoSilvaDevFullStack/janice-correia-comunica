@@ -32,23 +32,29 @@ const allowedOrigins = [
   ...additionalOrigins,
 ].filter(Boolean);
 
+const allowedHosts = (allowedOrigins
+  .map((o) => {
+    try {
+      return new URL(o as string).hostname.replace(/^www\./, "");
+    } catch {
+      return null;
+    }
+  })
+  .filter(Boolean) as string[]);
+
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
 
-      const isAllowed = allowedOrigins.some(allowed => {
-        if (!allowed) return false;
-        if (origin === allowed) return true;
-        // Permite correspondência por prefixo (ex.: https://janicecorreia.com.br e subpaths)
-        return origin.startsWith(allowed);
-      });
+      try {
+        const host = new URL(origin).hostname.replace(/^www\./, "");
+        if (allowedHosts.includes(host)) {
+          return callback(null, true);
+        }
+      } catch {}
 
-      if (isAllowed) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
+      callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],

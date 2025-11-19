@@ -53,7 +53,9 @@ app.use(
         if (allowedHosts.includes(host)) {
           return callback(null, true);
         }
-      } catch {}
+      } catch (e) {
+        return callback(new Error("Not allowed by CORS"));
+      }
 
       callback(new Error("Not allowed by CORS"));
     },

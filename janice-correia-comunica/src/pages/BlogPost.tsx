@@ -140,41 +140,13 @@ const BlogPost = () => {
           <div className="mt-12 p-6 bg-muted/50 rounded-lg">
             <h3 className="font-semibold text-lg mb-2">Sobre a Autora</h3>
             <p className="text-muted-foreground">
-              <strong>{article.author}</strong> é comunicóloga, palestrante e mentora especializada em comunicação estratégica, 
-              oratória e experiência do cliente. Com anos de experiência, ajuda profissionais e empresas a transformarem 
+              <strong>Janice Correia</strong> é comunicóloga, palestrante e mentora especializada em comunicação estratégica,
+              oratória e experiência do cliente. Com anos de experiência, ajuda profissionais e empresas a transformarem
               sua comunicação em diferencial competitivo.
             </p>
           </div>
 
-          {/* Related Articles */}
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-6">Artigos Relacionados</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {[] as any[] /* placeholder: lista de relacionados pode ser implementada futuramente */}
-                  <Link
-                    key={related.id}
-                    to={`/blog/${related.slug}`}
-                    className="group block"
-                  >
-                    <div className="relative h-48 overflow-hidden rounded-lg mb-4">
-                      <img
-                        src={related.image}
-                        alt={related.title}
-                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                    <Badge className="mb-2">{related.category}</Badge>
-                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors line-clamp-2">
-                      {related.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
-                      {related.excerpt}
-                    </p>
-                  </Link>
-                ))}
-            </div>
-          </div>
+          {/* Related Articles - reservado para implementação futura */}
         </div>
       </article>
 

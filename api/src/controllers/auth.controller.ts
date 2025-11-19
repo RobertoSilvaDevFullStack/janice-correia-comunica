@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import type { StringValue } from 'ms';
 import pool from '../config/database';
 
 export const login = async (req: Request, res: Response) => {
@@ -23,6 +24,8 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ error: 'Credenciais inválidas' });
     }
 
+    const expires = (process.env.JWT_EXPIRES ?? '24h') as StringValue;
+    const signOptions: SignOptions = { expiresIn: expires };
     const token = jwt.sign(
       { 
         userId: user.id, 
@@ -30,7 +33,7 @@ export const login = async (req: Request, res: Response) => {
         role: user.role || 'user' // Inclui a role no token JWT
       },
       process.env.JWT_SECRET!,
-      { expiresIn: '24h' }
+      signOptions
     );
 
     res.json({

@@ -3,9 +3,17 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const url = process.env.DATABASE_URL || '';
+const disableSslFlag = (process.env.DB_SSL || '').toLowerCase() === 'disable';
+const urlDisablesSsl = /sslmode=disable/i.test(url);
+
+const sslOption = (disableSslFlag || urlDisablesSsl)
+  ? false
+  : (process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false);
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  connectionString: url,
+  ssl: sslOption,
 });
 
 pool.on('connect', () => {

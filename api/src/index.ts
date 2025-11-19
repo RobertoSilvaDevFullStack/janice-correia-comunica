@@ -19,20 +19,32 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet());
 
 // CORS configuration
+const additionalOrigins = (process.env.CORS_ADDITIONAL_ORIGINS || '')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:8080",
   "http://localhost:8081",
   process.env.FRONTEND_URL,
+  ...additionalOrigins,
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Permite requisições sem origin (mobile apps, Postman, etc)
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      const isAllowed = allowedOrigins.some(allowed => {
+        if (!allowed) return false;
+        if (origin === allowed) return true;
+        // Permite correspondência por prefixo (ex.: https://janicecorreia.com.br e subpaths)
+        return origin.startsWith(allowed);
+      });
+
+      if (isAllowed) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));

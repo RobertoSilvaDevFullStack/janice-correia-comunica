@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
 interface PersonSchemaProps {
   name?: string;
@@ -10,19 +10,19 @@ interface PersonSchemaProps {
 }
 
 export const PersonSchema = ({
-  name = 'Janice Correia',
-  jobTitle = 'Especialista em Comunicação Estratégica e Experiência do Cliente',
-  description = 'Comunicóloga, palestrante e mentora especializada em comunicação assertiva, oratória e experiência do cliente.',
-  image = 'https://janicecorreia.com.br/hero-image.jpg',
-  url = 'https://janicecorreia.com.br',
+  name = "Janice Correia",
+  jobTitle = "Especialista em Comunicação Estratégica e Experiência do Cliente",
+  description = "Comunicóloga, palestrante e mentora especializada em comunicação assertiva, oratória e experiência do cliente.",
+  image = "https://janicecorreia.com.br/hero-image.jpg",
+  url = "https://janicecorreia.com.br",
   sameAs = [
-    'https://linkedin.com/in/janicecorreia',
-    'https://instagram.com/janicecorreia',
+    "https://linkedin.com/in/janicecorreia",
+    "https://www.instagram.com/janic_correia/",
   ],
 }: PersonSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
+    "@context": "https://schema.org",
+    "@type": "Person",
     name,
     jobTitle,
     description,
@@ -51,25 +51,25 @@ interface OrganizationSchemaProps {
 }
 
 export const OrganizationSchema = ({
-  name = 'Janice Correia - Comunicação Estratégica',
-  description = 'Serviços profissionais de comunicação empresarial, palestras e mentorias executivas.',
-  url = 'https://janicecorreia.com.br',
-  logo = 'https://janicecorreia.com.br/logo.png',
+  name = "Janice Correia - Comunicação Estratégica",
+  description = "Serviços profissionais de comunicação empresarial, palestras e mentorias executivas.",
+  url = "https://janicecorreia.com.br",
+  logo = "https://janicecorreia.com.br/logo.png",
   contactPoint = {
-    telephone: '+55-11-99999-9999',
-    contactType: 'customer service',
-    email: 'contato@janicecorreia.com.br',
+    telephone: "+55-11-99999-9999",
+    contactType: "customer service",
+    email: "contato@janicecorreia.com.br",
   },
 }: OrganizationSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
     name,
     description,
     url,
     logo,
     contactPoint: {
-      '@type': 'ContactPoint',
+      "@type": "ContactPoint",
       ...contactPoint,
     },
   };
@@ -97,32 +97,32 @@ export const ArticleSchema = ({
   image,
   datePublished,
   dateModified,
-  author = 'Janice Correia',
+  author = "Janice Correia",
   url,
 }: ArticleSchemaProps) => {
   const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
+    "@context": "https://schema.org",
+    "@type": "Article",
     headline,
     description,
     image,
     datePublished,
     dateModified: dateModified || datePublished,
     author: {
-      '@type': 'Person',
+      "@type": "Person",
       name: author,
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'Janice Correia',
+      "@type": "Organization",
+      name: "Janice Correia",
       logo: {
-        '@type': 'ImageObject',
-        url: 'https://janicecorreia.com.br/logo.png',
+        "@type": "ImageObject",
+        url: "https://janicecorreia.com.br/logo.png",
       },
     },
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': url,
+      "@type": "WebPage",
+      "@id": url,
     },
   };
 

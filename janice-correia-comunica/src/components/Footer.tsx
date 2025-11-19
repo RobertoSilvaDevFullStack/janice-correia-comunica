@@ -128,7 +128,7 @@ const Footer = () => {
                 <Linkedin size={24} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/janic_correia/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-accent transition-colors"

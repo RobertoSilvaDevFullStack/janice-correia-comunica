@@ -1,21 +1,31 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Settings = () => {
   const handleSave = () => {
-    toast.success('Configurações salvas com sucesso!');
+    toast.success("Configurações salvas com sucesso!");
   };
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-serif font-bold text-primary mb-2">Configurações</h1>
-        <p className="text-muted-foreground">Gerencie as configurações do site</p>
+        <h1 className="text-3xl font-serif font-bold text-primary mb-2">
+          Configurações
+        </h1>
+        <p className="text-muted-foreground">
+          Gerencie as configurações do site
+        </p>
       </div>
 
       <Tabs defaultValue="general" className="w-full">
@@ -30,16 +40,24 @@ const Settings = () => {
           <Card>
             <CardHeader>
               <CardTitle>Informações Gerais</CardTitle>
-              <CardDescription>Configure as informações básicas do site</CardDescription>
+              <CardDescription>
+                Configure as informações básicas do site
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="site-name">Nome do Site</Label>
-                <Input id="site-name" defaultValue="Janice Correia - Comunicação Corporativa" />
+                <Input
+                  id="site-name"
+                  defaultValue="Janice Correia - Comunicação Corporativa"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="tagline">Tagline</Label>
-                <Input id="tagline" defaultValue="Especialista em Oratória Corporativa" />
+                <Input
+                  id="tagline"
+                  defaultValue="Especialista em Oratória Corporativa"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Descrição</Label>
@@ -49,7 +67,9 @@ const Settings = () => {
                   defaultValue="Transformando a comunicação corporativa através de palestras, mentorias e treinamentos personalizados."
                 />
               </div>
-              <Button onClick={handleSave} className="btn-gradient">Salvar Alterações</Button>
+              <Button onClick={handleSave} className="btn-gradient">
+                Salvar Alterações
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -58,16 +78,24 @@ const Settings = () => {
           <Card>
             <CardHeader>
               <CardTitle>Redes Sociais</CardTitle>
-              <CardDescription>Configure os links das redes sociais</CardDescription>
+              <CardDescription>
+                Configure os links das redes sociais
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="instagram">Instagram</Label>
-                <Input id="instagram" placeholder="https://instagram.com/..." />
+                <Input
+                  id="instagram"
+                  placeholder="https://www.instagram.com/janic_correia/"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="linkedin">LinkedIn</Label>
-                <Input id="linkedin" placeholder="https://linkedin.com/in/..." />
+                <Input
+                  id="linkedin"
+                  placeholder="https://linkedin.com/in/..."
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="facebook">Facebook</Label>
@@ -77,7 +105,9 @@ const Settings = () => {
                 <Label htmlFor="youtube">YouTube</Label>
                 <Input id="youtube" placeholder="https://youtube.com/..." />
               </div>
-              <Button onClick={handleSave} className="btn-gradient">Salvar Alterações</Button>
+              <Button onClick={handleSave} className="btn-gradient">
+                Salvar Alterações
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -86,12 +116,17 @@ const Settings = () => {
           <Card>
             <CardHeader>
               <CardTitle>SEO Global</CardTitle>
-              <CardDescription>Configure as meta tags padrão do site</CardDescription>
+              <CardDescription>
+                Configure as meta tags padrão do site
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="meta-title">Meta Title</Label>
-                <Input id="meta-title" defaultValue="Janice Correia | Comunicação Corporativa" />
+                <Input
+                  id="meta-title"
+                  defaultValue="Janice Correia | Comunicação Corporativa"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="meta-description">Meta Description</Label>
@@ -103,9 +138,14 @@ const Settings = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="keywords">Keywords</Label>
-                <Input id="keywords" defaultValue="oratória, comunicação corporativa, palestras, mentorias" />
+                <Input
+                  id="keywords"
+                  defaultValue="oratória, comunicação corporativa, palestras, mentorias"
+                />
               </div>
-              <Button onClick={handleSave} className="btn-gradient">Salvar Alterações</Button>
+              <Button onClick={handleSave} className="btn-gradient">
+                Salvar Alterações
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -119,7 +159,11 @@ const Settings = () => {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" defaultValue="contato@janicecorreia.com.br" />
+                <Input
+                  id="email"
+                  type="email"
+                  defaultValue="contato@janicecorreia.com.br"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone</Label>
@@ -131,9 +175,15 @@ const Settings = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="address">Endereço</Label>
-                <Textarea id="address" rows={2} defaultValue="São Paulo, SP - Brasil" />
+                <Textarea
+                  id="address"
+                  rows={2}
+                  defaultValue="São Paulo, SP - Brasil"
+                />
               </div>
-              <Button onClick={handleSave} className="btn-gradient">Salvar Alterações</Button>
+              <Button onClick={handleSave} className="btn-gradient">
+                Salvar Alterações
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>

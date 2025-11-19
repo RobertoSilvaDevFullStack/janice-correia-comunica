@@ -7,7 +7,10 @@ const Hero = () => {
   const { openModal } = useContactModal();
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center pt-20"
+    >
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
@@ -15,7 +18,7 @@ const Hero = () => {
           className="w-full h-full object-cover"
           loading="eager"
           decoding="async"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
       </div>
@@ -29,11 +32,13 @@ const Hero = () => {
             Especialista em Oratória Corporativa e Comunicação Estratégica
           </p>
           <p className="text-lg mb-8 text-white/80">
-            Há mais de 15 anos ajudando empresas e profissionais a alcançarem resultados extraordinários através de uma comunicação clara, assertiva e impactante.
+            Há mais de 15 anos ajudando empresas e profissionais a alcançarem
+            resultados extraordinários através de uma comunicação clara,
+            assertiva e impactante.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
-              onClick={() => openModal('palestras')}
+              onClick={() => openModal("palestras")}
               size="lg"
               className="btn-gradient text-primary-foreground font-semibold"
             >
@@ -41,7 +46,7 @@ const Hero = () => {
               <ArrowRight className="ml-2" size={20} />
             </Button>
             <Button
-              onClick={() => openModal('mentorias')}
+              onClick={() => openModal("mentorias")}
               size="lg"
               variant="outline"
               className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm"

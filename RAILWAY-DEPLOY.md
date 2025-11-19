@@ -34,7 +34,7 @@ PORT=3001
 
 NODE_ENV=production
 
-FRONTEND_URL=https://seu-projeto.lovable.app
+FRONTEND_URL=https://seu-dominio-frontend
 ```
 
 ### ⚠️ IMPORTANTE - Gerar JWT_SECRET Seguro
@@ -73,20 +73,20 @@ curl -X POST https://seu-backend.up.railway.app/api/auth/login \
 
 ## Passo 7: Atualizar Frontend
 
-Após ter a URL pública do backend, atualize no Lovable:
+Após ter a URL pública do backend, atualize no seu frontend:
 
 1. Crie/edite o arquivo `.env`:
 ```
 VITE_API_URL=https://seu-backend.up.railway.app/api
 ```
 
-2. Publique as mudanças no Lovable
+2. Publique as mudanças na sua plataforma de hospedagem
 
 ## Passo 8: Atualizar CORS no Backend
 
 Volte nas **Variables** do Railway e atualize:
 ```
-FRONTEND_URL=https://seu-projeto.lovable.app
+FRONTEND_URL=https://seu-dominio-frontend
 ```
 
 Railway vai fazer redeploy automaticamente.

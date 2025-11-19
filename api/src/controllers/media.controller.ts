@@ -42,7 +42,8 @@ export const uploadImage = (req: Request, res: Response) => {
       file.pipe(write)
       write.on('finish', () => {
         saved = true
-        const url = `/uploads/${finalName}`
+        const base = process.env.PUBLIC_UPLOAD_BASE_URL || `${req.protocol}://${req.get('host')}`
+        const url = `${base}/uploads/${finalName}`
         res.status(201).json({ url })
       })
       write.on('error', (err) => {

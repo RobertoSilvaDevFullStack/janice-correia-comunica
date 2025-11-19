@@ -2,7 +2,8 @@ import { Request, Response } from 'express'
 import Busboy from 'busboy'
 import path from 'path'
 import fs from 'fs'
-import { v4 as uuidv4 } from 'uuid'
+import crypto from 'crypto'
+const uuidv4 = () => crypto.randomUUID()
 
 const MAX_SIZE = 5 * 1024 * 1024 // 5MB
 const ALLOWED = new Set(['image/jpeg','image/png','image/gif'])

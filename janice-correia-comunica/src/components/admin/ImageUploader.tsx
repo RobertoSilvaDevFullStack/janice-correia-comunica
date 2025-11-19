@@ -41,8 +41,8 @@ export const ImageUploader: React.FC<Props> = ({ value, onChange, label = 'Image
       setPreview(data.url)
       onChange(data.url)
       toast.success('Imagem enviada')
-    } catch (err: any) {
-      const msg = err.response?.data?.error || 'Falha no upload'
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { error?: string } } }).response?.data?.error || 'Falha no upload'
       toast.error(msg)
     }
   }

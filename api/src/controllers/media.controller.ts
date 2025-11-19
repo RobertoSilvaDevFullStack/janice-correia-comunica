@@ -15,7 +15,7 @@ export const uploadImage = (req: Request, res: Response) => {
     const uploadsDir = path.join(__dirname, '..', 'uploads')
     if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
 
-    busboy.on('file', (name, file, info) => {
+    busboy.on('file', (name: string, file: NodeJS.ReadableStream, info: { filename: string; encoding: string; mimeType: string }) => {
       const { mimeType, filename } = info
       if (!ALLOWED.has(mimeType)) {
         file.resume()
@@ -28,7 +28,7 @@ export const uploadImage = (req: Request, res: Response) => {
       const savePath = path.join(uploadsDir, finalName)
       const write = fs.createWriteStream(savePath)
 
-      file.on('data', (data) => {
+      file.on('data', (data: Buffer) => {
         size += data.length
         if (size > MAX_SIZE) {
           write.destroy()

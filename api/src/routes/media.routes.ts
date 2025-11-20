@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { authenticateToken, requireAdmin } from '../middleware/auth'
 import { uploadImage } from '../controllers/media.controller'
+import { authenticateToken, requireAdmin } from '../middleware/auth'
 
 const router = Router()
 

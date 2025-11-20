@@ -1,65 +1,85 @@
 import { Request, Response } from 'express'
 import Busboy from 'busboy'
+import { randomUUID } from 'uuid'
 import path from 'path'
 import fs from 'fs'
-import crypto from 'crypto'
-const uuidv4 = () => crypto.randomUUID()
 
-const MAX_SIZE = 5 * 1024 * 1024 // 5MB
 const ALLOWED = new Set(['image/jpeg','image/png','image/gif'])
+const MAX_SIZE = 5 * 1024 * 1024
 
 export const uploadImage = (req: Request, res: Response) => {
   try {
     const busboy = Busboy({ headers: req.headers })
-    let saved = false
-
-    const uploadsDir = path.join(__dirname, '..', 'uploads')
-    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
+    let finished = false
 
     busboy.on('file', (name: string, file: NodeJS.ReadableStream, info: { filename: string; encoding: string; mimeType: string }) => {
-      const { mimeType, filename } = info
-      if (!ALLOWED.has(mimeType)) {
+      if (!ALLOWED.has(info.mimeType)) {
         file.resume()
-        return res.status(400).json({ error: 'Formato de imagem inválido. Use JPG, PNG ou GIF.' })
+        if (!finished) {
+          finished = true
+          return res.status(400).json({ error: 'Formato inválido. Use JPG, PNG ou GIF' })
+        }
+        return
       }
 
-      let size = 0
-      const ext = path.extname(filename) || '.jpg'
-      const finalName = `${uuidv4()}${ext}`
-      const savePath = path.join(uploadsDir, finalName)
-      const write = fs.createWriteStream(savePath)
+      const ext = info.filename.includes('.') ? info.filename.split('.').pop() : 'png'
+      const finalName = `${randomUUID()}.${ext}`
+      const uploadsDir = path.join(__dirname, '..', 'uploads')
+      if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
+      const targetPath = path.join(uploadsDir, finalName)
+      const write = fs.createWriteStream(targetPath)
 
+      let size = 0
       file.on('data', (data: Buffer) => {
         size += data.length
         if (size > MAX_SIZE) {
-          write.destroy()
           file.resume()
-          fs.unlink(savePath, () => {})
-          return res.status(413).json({ error: 'Arquivo excede 5MB' })
+          write.destroy()
+          if (!finished) {
+            finished = true
+            return res.status(413).json({ error: 'Arquivo excede 5MB' })
+          }
         }
       })
 
       file.pipe(write)
+
       write.on('finish', () => {
-        saved = true
         const base = process.env.PUBLIC_UPLOAD_BASE_URL || `${req.protocol}://${req.get('host')}`
         const url = `${base}/uploads/${finalName}`
-        res.status(201).json({ url })
+        if (!finished) {
+          finished = true
+          return res.status(201).json({ url })
+        }
       })
+
       write.on('error', (err) => {
-        fs.unlink(savePath, () => {})
-        res.status(500).json({ error: 'Falha ao salvar imagem' })
+        console.error('Upload error:', err)
+        if (!finished) {
+          finished = true
+          return res.status(500).json({ error: 'Falha ao salvar arquivo' })
+        }
       })
     })
 
+    busboy.on('error', (err) => {
+      console.error('Busboy error:', err)
+      if (!finished) {
+        finished = true
+        return res.status(500).json({ error: 'Falha no processamento do upload' })
+      }
+    })
+
     busboy.on('finish', () => {
-      if (!saved) {
-        res.status(400).json({ error: 'Nenhum arquivo enviado' })
+      if (!finished) {
+        finished = true
+        return res.status(400).json({ error: 'Nenhum arquivo enviado' })
       }
     })
 
     req.pipe(busboy)
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao processar upload' })
+  } catch (e) {
+    console.error('Upload handler error:', e)
+    return res.status(500).json({ error: 'Erro interno no upload' })
   }
 }

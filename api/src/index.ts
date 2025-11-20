@@ -23,7 +23,11 @@ const PORT = process.env.PORT || 3001;
 app.set("trust proxy", true);
 
 // Security middleware
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 
 // CORS configuration
 const additionalOrigins = (process.env.CORS_ADDITIONAL_ORIGINS || "")

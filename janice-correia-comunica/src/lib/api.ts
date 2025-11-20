@@ -12,11 +12,13 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    const hdrs = (config.headers || {}) as Record<string, string>;
     if (config.data instanceof FormData) {
-      delete (config.headers as any)['Content-Type'];
+      delete hdrs['Content-Type'];
     } else {
-      config.headers['Content-Type'] = 'application/json';
+      hdrs['Content-Type'] = 'application/json';
     }
+    config.headers = hdrs;
     return config;
   },
   (error) => {

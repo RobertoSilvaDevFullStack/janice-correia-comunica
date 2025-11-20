@@ -9,7 +9,7 @@ const MAX_SIZE = 5 * 1024 * 1024
 
 export const uploadImage = (req: Request, res: Response) => {
   try {
-    const busboy = new Busboy({ headers: req.headers })
+    const busboy = Busboy({ headers: req.headers })
     let finished = false
 
     busboy.on('file', (name: string, file: NodeJS.ReadableStream, info: { filename: string; encoding: string; mimeType: string }) => {
@@ -62,7 +62,7 @@ export const uploadImage = (req: Request, res: Response) => {
       })
     })
 
-    busboy.on('error', (err) => {
+    busboy.on('error', (err: unknown) => {
       console.error('Busboy error:', err)
       if (!finished) {
         finished = true

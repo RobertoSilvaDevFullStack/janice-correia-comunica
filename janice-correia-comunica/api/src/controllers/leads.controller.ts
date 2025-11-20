@@ -20,12 +20,46 @@ export const createLead = async (req: Request, res: Response) => {
       .filter(Boolean)
       .join('\n');
 
-    const result = await pool.query(
-      `INSERT INTO leads (name, email, phone, company, message, source, status)
-       VALUES ($1, $2, $3, $4, $5, $6, 'new')
-       RETURNING *`,
-      [name, email, phone || null, company || null, finalMessage || null, source || 'site']
+    // Detect available columns at runtime to support different DB schemas
+    const { rows: cols } = await pool.query(
+      `SELECT column_name FROM information_schema.columns WHERE table_name = 'leads'`
     );
+    const available = new Set(cols.map((c: { column_name: string }) => c.column_name));
+
+    const columns: string[] = ['name', 'email'];
+    const values: any[] = [name, email];
+
+    if (available.has('phone')) {
+      columns.push('phone');
+      values.push(phone || null);
+    }
+    if (available.has('company')) {
+      columns.push('company');
+      values.push(company || null);
+    }
+    if (available.has('source')) {
+      columns.push('source');
+      values.push(source || 'site');
+    }
+    if (available.has('interest')) {
+      // If interest column exists, store it separately
+      columns.push('interest');
+      values.push(interest || null);
+    }
+    if (available.has('message')) {
+      columns.push('message');
+      values.push(finalMessage || null);
+    }
+    // status is optional (defaults to 'new'); include only if column exists and no default
+    if (available.has('status')) {
+      columns.push('status');
+      values.push('new');
+    }
+
+    const placeholders = values.map((_, i) => `$${i + 1}`).join(', ');
+    const insertSql = `INSERT INTO leads (${columns.join(', ')}) VALUES (${placeholders}) RETURNING *`;
+
+    const result = await pool.query(insertSql, values);
 
     res.status(201).json({
       message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',

@@ -2,10 +2,11 @@ import { Instagram, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import perfilImg from "@/assets/janice-perfil.jpg";
-import capaMulheres from "@/assets/janice-palestra-mulheres-capa.jpg";
-import palestraMulheres from "@/assets/janice-palestra-mulheres.jpg";
-import capaPalestras from "@/assets/janice-palestras-capa.png";
-import apresentacaoBeju from "@/assets/apresentanddo-festa-beju.png";
+import capaEngelux from "@/assets/treinamento-engelux-relacionamento.jpg";
+import capaEscola from "@/assets/treinamento-escola.jpg";
+import capaJr from "@/assets/treinamento-jr-distribuicao.jpg";
+import capaElilon from "@/assets/treinamento-elilon.jpg";
+import capaPlano from "@/assets/treinamento-plano.jpg";
 
 const InstagramFeed = () => {
   // Origem das imagens: arquivos locais em `src/assets`.
@@ -19,32 +20,32 @@ const InstagramFeed = () => {
     },
     {
       id: 2,
-      image: capaMulheres,
+      image: capaEngelux,
       caption: "Workshop com a equipe da Engelux! 💼",
       link: "https://www.instagram.com/janic_correia/",
     },
     {
       id: 3,
-      image: palestraMulheres,
+      image: capaEscola,
       caption:
         "Comunicação clara é a base de qualquer relacionamento profissional 📊",
       link: "https://www.instagram.com/janic_correia/",
     },
     {
       id: 4,
-      image: capaPalestras,
+      image: capaJr,
       caption: "Oratória corporativa - momento inspirador! ✨",
       link: "https://www.instagram.com/janic_correia/",
     },
     {
       id: 5,
-      image: apresentacaoBeju,
+      image: capaElilon,
       caption: "Transformando líderes através da comunicação eficaz 🚀",
       link: "https://www.instagram.com/janic_correia/",
     },
     {
       id: 6,
-      image: capaPalestras,
+      image: capaPlano,
       caption: "Cada apresentação impacta vidas 💡",
       link: "https://www.instagram.com/janic_correia/",
     },
@@ -141,8 +142,6 @@ const InstagramFeed = () => {
         {error && (
           <p className="text-center text-sm text-destructive mt-4">{error}</p>
         )}
-
-        
       </div>
     </section>
   );

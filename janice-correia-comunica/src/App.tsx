@@ -11,6 +11,8 @@ import { AdminLayout } from '@/components/admin/AdminLayout';
 import Index from "./pages/Index";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
+import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
+import TermosUso from "./pages/TermosUso";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import LeadsList from "./pages/admin/LeadsList";
@@ -39,6 +41,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
+              <Route path="/termos-uso" element={<TermosUso />} />
               
               
               {/* Admin Routes */}

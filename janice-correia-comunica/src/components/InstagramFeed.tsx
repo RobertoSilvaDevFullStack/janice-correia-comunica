@@ -2,6 +2,11 @@ import { Instagram, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import api from "@/lib/api";
 import { useEffect, useState } from "react";
+import perfilImg from "@/assets/janice-perfil.jpg";
+import capaMulheres from "@/assets/janice-palestra-mulheres-capa.jpg";
+import palestraMulheres from "@/assets/janice-palestra-mulheres.jpg";
+import capaPalestras from "@/assets/janice-palestras-capa.png";
+import apresentacaoBeju from "@/assets/apresentanddo-festa-beju.png";
 
 const InstagramFeed = () => {
   const [loading, setLoading] = useState(false);
@@ -10,49 +15,12 @@ const InstagramFeed = () => {
 
   // Fallback ilustrativo
   const fallbackPosts = [
-    {
-      id: 1,
-      image:
-        "https://www.instagram.com/reel/DBw6JxdSEVS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      caption: "Dica de comunicação do dia: escute mais do que fala! 🎯",
-      likes: 234,
-    },
-    {
-      id: 2,
-      image:
-        "https://www.instagram.com/p/DQz9LqSEg16/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      caption: "Workshop incríveis com a equipe da Engelux! 💼",
-      likes: 189,
-    },
-    {
-      id: 3,
-      image:
-        "https://www.instagram.com/p/DD8PZAqOYZa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      caption:
-        "A comunicação clara é a base de qualquer relacionamento profissional 📊",
-      likes: 312,
-    },
-    {
-      id: 4,
-      image:
-        "https://www.instagram.com/p/DQz9LqSEg16/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      caption: "Palestra sobre oratória corporativa - momento inspirador! ✨",
-      likes: 267,
-    },
-    {
-      id: 5,
-      image:
-        "https://www.instagram.com/p/C5EuJFkrBxB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      caption: "Transformando líderes através da comunicação eficaz 🚀",
-      likes: 198,
-    },
-    {
-      id: 6,
-      image:
-        "https://www.instagram.com/p/C4lszkxr7NC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-      caption: "Cada apresentação é uma oportunidade de impactar vidas 💡",
-      likes: 276,
-    },
+    { id: 1, image: perfilImg, caption: "Dica de comunicação: escute mais do que fala! 🎯", link: "https://instagram.com/janic_correia" },
+    { id: 2, image: capaMulheres, caption: "Workshop com a equipe da Engelux! 💼", link: "https://instagram.com/janic_correia" },
+    { id: 3, image: palestraMulheres, caption: "Comunicação clara é a base de qualquer relacionamento profissional 📊", link: "https://instagram.com/janic_correia" },
+    { id: 4, image: capaPalestras, caption: "Oratória corporativa - momento inspirador! ✨", link: "https://instagram.com/janic_correia" },
+    { id: 5, image: apresentacaoBeju, caption: "Transformando líderes através da comunicação eficaz 🚀", link: "https://instagram.com/janic_correia" },
+    { id: 6, image: capaPalestras, caption: "Cada apresentação impacta vidas 💡", link: "https://instagram.com/janic_correia" },
   ];
 
   useEffect(() => {
@@ -105,7 +73,7 @@ const InstagramFeed = () => {
             <div
               key={post.id}
               className="relative group cursor-pointer overflow-hidden rounded-lg card-hover"
-              onClick={() => window.open((post as any).link || "https://instagram.com/janic_correia", "_blank")}
+              onClick={() => window.open("link" in post ? post.link : "https://instagram.com/janic_correia", "_blank")}
             >
               <img
                 src={post.image}

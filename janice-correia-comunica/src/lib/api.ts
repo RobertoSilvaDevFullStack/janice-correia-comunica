@@ -16,10 +16,10 @@ api.interceptors.request.use(
       if (token) headers.set('Authorization', `Bearer ${token}`);
       if (isForm) headers.delete('Content-Type'); else headers.set('Content-Type', 'application/json');
     } else {
-      const hdrs = (headers || {}) as Record<string, string>;
-      if (token) hdrs['Authorization'] = `Bearer ${token}`;
-      if (isForm) delete hdrs['Content-Type']; else hdrs['Content-Type'] = 'application/json';
-      config.headers = hdrs;
+      const hdrsObj = (headers || {}) as Record<string, string>;
+      if (token) hdrsObj['Authorization'] = `Bearer ${token}`;
+      if (isForm) delete hdrsObj['Content-Type']; else hdrsObj['Content-Type'] = 'application/json';
+      config.headers = new AxiosHeaders(hdrsObj);
     }
 
     return config;

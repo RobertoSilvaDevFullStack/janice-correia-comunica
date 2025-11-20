@@ -11,13 +11,14 @@ import palestrasRoutes from "./routes/palestras.routes";
 import mentoriasRoutes from "./routes/mentorias.routes";
 import adminRoutes from "./routes/admin.routes";
 import mediaRoutes from "./routes/media.routes";
-import path from "path";
-import fs from "fs";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Behind reverse proxy (EasyPanel/Nginx) so trust X-Forwarded-* to get correct https
+app.set("trust proxy", true);
 
 // Security middleware
 app.use(helmet());
@@ -81,6 +82,13 @@ app.use("/api/", limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Static uploads directory
+const uploadsDir = path.join(__dirname, "..", "uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use("/uploads", express.static(uploadsDir));
+
 // Health check
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
@@ -96,10 +104,7 @@ app.use("/api/mentorias", mentoriasRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/media", mediaRoutes);
 
-// Static serving of uploads
-const uploadsDir = path.join(__dirname, "..", "uploads");
-if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
-app.use("/uploads", express.static(uploadsDir));
+// Static serving of uploads (already configured above)
 
 // 404 handler
 app.use((req, res) => {

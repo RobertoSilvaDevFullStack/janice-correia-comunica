@@ -265,7 +265,7 @@ const PalestraForm = () => {
             <div className="border border-border rounded-lg overflow-hidden">
               {formData.image && (
                 <img
-                  src={formData.image}
+                  src={(formData.image || '').replace(/^http:\/\//, 'https://')}
                   alt={formData.title || 'Preview'}
                   className="w-full h-48 object-cover"
                   onError={(e) => {

@@ -11,6 +11,8 @@ import palestrasRoutes from "./routes/palestras.routes";
 import mentoriasRoutes from "./routes/mentorias.routes";
 import adminRoutes from "./routes/admin.routes";
 import mediaRoutes from "./routes/media.routes";
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -24,9 +26,9 @@ app.set("trust proxy", true);
 app.use(helmet());
 
 // CORS configuration
-const additionalOrigins = (process.env.CORS_ADDITIONAL_ORIGINS || '')
-  .split(',')
-  .map(s => s.trim())
+const additionalOrigins = (process.env.CORS_ADDITIONAL_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
   .filter(Boolean);
 
 const allowedOrigins = [
@@ -37,7 +39,7 @@ const allowedOrigins = [
   ...additionalOrigins,
 ].filter(Boolean);
 
-const allowedHosts = (allowedOrigins
+const allowedHosts = allowedOrigins
   .map((o) => {
     try {
       return new URL(o as string).hostname.replace(/^www\./, "");
@@ -45,7 +47,7 @@ const allowedHosts = (allowedOrigins
       return null;
     }
   })
-  .filter(Boolean) as string[]);
+  .filter(Boolean) as string[];
 
 app.use(
   cors({
@@ -64,9 +66,9 @@ app.use(
       callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 

@@ -25,7 +25,7 @@ const Palestras = () => {
             <Card key={index} className="overflow-hidden card-hover">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={palestra.image}
+                  src={(palestra.image || '').replace(/^http:\/\//, 'https://')}
                   alt={palestra.title}
                   className="w-full h-full object-cover"
                   loading="lazy"

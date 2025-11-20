@@ -35,11 +35,10 @@ export const ImageUploader: React.FC<Props> = ({ value, onChange, label = 'Image
     try {
       const form = new FormData()
       form.append('file', file)
-      const { data } = await api.post('/media/upload', form, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      setPreview(data.url)
-      onChange(data.url)
+      const { data } = await api.post('/media/upload', form)
+      const secureUrl = (data.url || '').replace(/^http:\/\//, 'https://')
+      setPreview(secureUrl)
+      onChange(secureUrl)
       toast.success('Imagem enviada')
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { error?: string } } }).response?.data?.error || 'Falha no upload'

@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2 } from "lucide-react";
@@ -31,7 +37,7 @@ const Mentorias = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.nome || !formData.email || !formData.mensagem) {
       toast({
         title: "Campos obrigatórios",
@@ -63,33 +69,40 @@ const Mentorias = () => {
             Mentorias e Treinamentos
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Programas personalizados para transformar sua comunicação e alcançar resultados extraordinários
+            Programas personalizados para transformar sua comunicação e alcançar
+            resultados extraordinários
           </p>
         </div>
 
         {/* Programas Disponíveis centralizados em 2 colunas x 2 linhas */}
         <div className="mb-16">
-          <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
+          <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-justify">
             Programas Disponíveis
           </h3>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {(mentorias || []).slice(0, 4).map((programa, index) => (
               <Card key={index} className="card-hover">
                 <CardHeader>
-                  <CardTitle className="font-serif text-xl text-primary text-center">
+                  <CardTitle className="font-serif text-xl text-primary text-justify">
                     {programa.title}
                   </CardTitle>
-                  <CardDescription className="text-center">
+                  <CardDescription className="text-justify">
                     {programa.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-center gap-6 text-sm text-muted-foreground">
                     <div>
-                      <span className="font-semibold text-primary">Duração:</span> {programa.duration}
+                      <span className="font-semibold text-primary">
+                        Duração:
+                      </span>{" "}
+                      {programa.duration}
                     </div>
                     <div>
-                      <span className="font-semibold text-primary">Formato:</span> {programa.format}
+                      <span className="font-semibold text-primary">
+                        Formato:
+                      </span>{" "}
+                      {programa.format}
                     </div>
                   </div>
                 </CardContent>
@@ -112,7 +125,11 @@ const Mentorias = () => {
             ))}
           </ul>
           <div className="text-center mt-8">
-            <Button onClick={() => openModal('mentorias')} size="lg" className="btn-gradient">
+            <Button
+              onClick={() => openModal("mentorias")}
+              size="lg"
+              className="btn-gradient"
+            >
               Quero Saber Mais
             </Button>
           </div>
@@ -124,7 +141,8 @@ const Mentorias = () => {
               Manifestar Interesse
             </CardTitle>
             <CardDescription>
-              Preencha o formulário abaixo e entraremos em contato para agendar uma conversa inicial gratuita
+              Preencha o formulário abaixo e entraremos em contato para agendar
+              uma conversa inicial gratuita
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -133,7 +151,9 @@ const Mentorias = () => {
                 <Input
                   placeholder="Nome completo *"
                   value={formData.nome}
-                  onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, nome: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -142,7 +162,9 @@ const Mentorias = () => {
                   type="email"
                   placeholder="E-mail *"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -150,21 +172,27 @@ const Mentorias = () => {
                 <Input
                   placeholder="Telefone"
                   value={formData.telefone}
-                  onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, telefone: e.target.value })
+                  }
                 />
               </div>
               <div>
                 <Input
                   placeholder="Empresa"
                   value={formData.empresa}
-                  onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, empresa: e.target.value })
+                  }
                 />
               </div>
               <div>
                 <Textarea
                   placeholder="Conte-nos mais sobre seus objetivos e desafios de comunicação *"
                   value={formData.mensagem}
-                  onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, mensagem: e.target.value })
+                  }
                   rows={5}
                   required
                 />

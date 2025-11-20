@@ -26,8 +26,8 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      // Token inválido ou expirado
+    if (error.response?.status === 401 || error.response?.status === 403) {
+      // Token inválido/expirado ou acesso negado
       localStorage.removeItem('authToken');
       localStorage.removeItem('user');
       window.location.href = '/admin/login';

@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import api from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { useContactModal } from "@/hooks/useContactModal";
 import { useMentorias } from "@/hooks/useMentorias";
@@ -35,9 +36,9 @@ const Mentorias = () => {
 
   const { data: mentorias } = useMentorias();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (!formData.nome || !formData.email || !formData.mensagem) {
       toast({
         title: "Campos obrigatórios",
@@ -47,18 +48,32 @@ const Mentorias = () => {
       return;
     }
 
-    toast({
-      title: "Mensagem enviada!",
-      description: "Entraremos em contato em breve para agendar uma conversa.",
-    });
-
-    setFormData({
-      nome: "",
-      email: "",
-      telefone: "",
-      empresa: "",
-      mensagem: "",
-    });
+    try {
+      const payload = {
+        name: formData.nome,
+        email: formData.email,
+        phone: formData.telefone || undefined,
+        interest: "mentorias" as const,
+        message: `${formData.empresa ? `Empresa: ${formData.empresa}\n` : ""}${formData.mensagem}`,
+      };
+      const { data } = await api.post("/leads", payload);
+      console.log("Lead criado:", data);
+      toast({
+        title: "Mensagem enviada!",
+        description: "Entraremos em contato em breve para agendar uma conversa.",
+      });
+      setFormData({
+        nome: "",
+        email: "",
+        telefone: "",
+        empresa: "",
+        mensagem: "",
+      });
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { error?: string } } }).response?.data?.error || "Erro ao enviar mensagem";
+      console.error("Falha ao criar lead:", err);
+      toast({ title: "Erro", description: msg, variant: "destructive" });
+    }
   };
 
   return (
@@ -137,12 +152,12 @@ const Mentorias = () => {
 
         <Card className="max-w-2xl mx-auto shadow-medium">
           <CardHeader className="text-center">
-            <CardTitle className="font-serif text-3xl text-primary">
-              Manifestar Interesse
+            <CardTitle className="font-serif text-3xl text-primary text-center">
+              Entre em contato para agendar uma conversa inicial gratuita
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-center">
               Preencha o formulário abaixo e entraremos em contato para agendar
-              uma conversa inicial gratuita
+              uma reunião.
             </CardDescription>
           </CardHeader>
           <CardContent>

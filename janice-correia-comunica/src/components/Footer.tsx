@@ -18,23 +18,31 @@ import {
   MapPin,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import api from "@/lib/api";
 
 const Footer = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
-    toast({
-      title: "Inscrição realizada!",
-      description: "Você receberá nossos conteúdos exclusivos em breve.",
-    });
-
-    setEmail("");
-    setIsOpen(false);
+    try {
+      const name = email.split("@")[0] || "Newsletter";
+      const payload = { name, email, interest: "newsletter" as const, message: "Inscrição na newsletter" };
+      await api.post("/leads", payload);
+      toast({
+        title: "Inscrição realizada!",
+        description: "Você receberá nossos conteúdos exclusivos em breve.",
+      });
+      setEmail("");
+      setIsOpen(false);
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { error?: string } } }).response?.data?.error || "Erro ao inscrever-se";
+      toast({ title: "Erro", description: msg, variant: "destructive" });
+    }
   };
 
   const scrollToSection = (href: string) => {

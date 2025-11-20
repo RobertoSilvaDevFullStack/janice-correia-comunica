@@ -11,6 +11,7 @@ import palestrasRoutes from "./routes/palestras.routes";
 import mentoriasRoutes from "./routes/mentorias.routes";
 import adminRoutes from "./routes/admin.routes";
 import mediaRoutes from "./routes/media.routes";
+import instagramRoutes from "./routes/instagram.routes";
 import fs from "fs";
 import path from "path";
 
@@ -109,6 +110,7 @@ app.use("/api/palestras", palestrasRoutes);
 app.use("/api/mentorias", mentoriasRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/media", mediaRoutes);
+app.use("/api/instagram", instagramRoutes);
 
 // Static serving of uploads (already configured above)
 

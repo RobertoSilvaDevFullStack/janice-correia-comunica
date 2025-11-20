@@ -25,7 +25,7 @@ const TestimonialsList = () => {
   const [search, setSearch] = useState('');
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const { data: testimonials, isLoading, error } = useTestimonials();
+  const { data: testimonials, isLoading, error } = useTestimonials('all');
   const deleteMutation = useDeleteTestimonial();
 
   const filteredTestimonials = testimonials?.filter(t =>

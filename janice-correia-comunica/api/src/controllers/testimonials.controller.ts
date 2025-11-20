@@ -3,10 +3,24 @@ import pool from '../config/database';
 
 export const getAllTestimonials = async (req: Request, res: Response) => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM testimonials WHERE status = $1 ORDER BY display_order ASC, created_at DESC',
-      ['approved']
-    );
+    const { status } = req.query as { status?: string };
+
+    let query = 'SELECT * FROM testimonials';
+    const params: any[] = [];
+
+    if (status === 'all') {
+      // no filter
+    } else if (status && ['approved', 'pending', 'rejected'].includes(status)) {
+      query += ' WHERE status = $1';
+      params.push(status);
+    } else {
+      query += ' WHERE status = $1';
+      params.push('approved');
+    }
+
+    query += ' ORDER BY display_order ASC, created_at DESC';
+
+    const result = await pool.query(query, params);
 
     res.json(result.rows);
   } catch (error) {

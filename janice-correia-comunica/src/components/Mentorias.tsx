@@ -54,7 +54,9 @@ const Mentorias = () => {
         email: formData.email,
         phone: formData.telefone || undefined,
         interest: "mentorias" as const,
-        message: `${formData.empresa ? `Empresa: ${formData.empresa}\n` : ""}${formData.mensagem}`,
+        company: formData.empresa || undefined,
+        source: "site",
+        message: formData.mensagem,
       };
       const { data } = await api.post("/leads", payload);
       console.log("Lead criado:", data);

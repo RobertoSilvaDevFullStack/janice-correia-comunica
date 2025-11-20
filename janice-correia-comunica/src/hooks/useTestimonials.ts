@@ -15,11 +15,12 @@ interface Testimonial {
   updated_at: string;
 }
 
-export const useTestimonials = () => {
+export const useTestimonials = (status?: 'approved' | 'pending' | 'rejected' | 'all') => {
   return useQuery({
-    queryKey: ['testimonials'],
+    queryKey: ['testimonials', status],
     queryFn: async () => {
-      const { data } = await api.get<Testimonial[]>('/testimonials');
+      const params = status && status !== 'all' ? { status } : status === 'all' ? { status: 'all' } : undefined;
+      const { data } = await api.get<Testimonial[]>('/testimonials', { params });
       return data;
     },
   });

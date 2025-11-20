@@ -3,13 +3,28 @@ import pool from '../config/database';
 
 export const createLead = async (req: Request, res: Response) => {
   try {
-    const { name, email, phone, interest, message } = req.body;
+    const { name, email, phone, interest, message, company, source } = req.body as {
+      name: string;
+      email: string;
+      phone?: string;
+      interest?: string;
+      message?: string;
+      company?: string;
+      source?: string;
+    };
+
+    const finalMessage = [
+      interest ? `Interesse: ${interest}` : null,
+      message || null,
+    ]
+      .filter(Boolean)
+      .join('\n');
 
     const result = await pool.query(
-      `INSERT INTO leads (name, email, phone, interest, message, status)
-       VALUES ($1, $2, $3, $4, $5, 'new')
+      `INSERT INTO leads (name, email, phone, company, message, source, status)
+       VALUES ($1, $2, $3, $4, $5, $6, 'new')
        RETURNING *`,
-      [name, email, phone, interest, message]
+      [name, email, phone || null, company || null, finalMessage || null, source || 'site']
     );
 
     res.status(201).json({

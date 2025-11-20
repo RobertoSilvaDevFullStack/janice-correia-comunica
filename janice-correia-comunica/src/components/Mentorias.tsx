@@ -67,44 +67,24 @@ const Mentorias = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div>
-            {/* Imagem ilustrativa pode ser mantida ou substituída por capa da mentoria */}
-            {/* <img src={algumaImagem} alt="Mentoria" className="w-full h-auto rounded-lg shadow-medium mb-8" /> */}
-            <h3 className="font-serif text-2xl font-bold text-primary mb-6">
-              Nossos Diferenciais
-            </h3>
-            <ul className="space-y-4">
-              {diferenciais.map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <Button 
-              onClick={() => openModal('mentorias')} 
-              size="lg" 
-              className="w-full mt-8 btn-gradient"
-            >
-              Quero Saber Mais
-            </Button>
-          </div>
-
-          <div className="space-y-6">
-            <h3 className="font-serif text-2xl font-bold text-primary mb-6">
-              Programas Disponíveis
-            </h3>
-            {(mentorias || []).map((programa, index) => (
+        {/* Programas Disponíveis centralizados em 2 colunas x 2 linhas */}
+        <div className="mb-16">
+          <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
+            Programas Disponíveis
+          </h3>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            {(mentorias || []).slice(0, 4).map((programa, index) => (
               <Card key={index} className="card-hover">
                 <CardHeader>
-                  <CardTitle className="font-serif text-xl text-primary">
+                  <CardTitle className="font-serif text-xl text-primary text-center">
                     {programa.title}
                   </CardTitle>
-                  <CardDescription>{programa.description}</CardDescription>
+                  <CardDescription className="text-center">
+                    {programa.description}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
+                  <div className="flex justify-center gap-6 text-sm text-muted-foreground">
                     <div>
                       <span className="font-semibold text-primary">Duração:</span> {programa.duration}
                     </div>
@@ -115,6 +95,26 @@ const Mentorias = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+
+        {/* Nossos Diferenciais centralizados abaixo */}
+        <div className="mb-16">
+          <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
+            Nossos Diferenciais
+          </h3>
+          <ul className="max-w-3xl mx-auto space-y-4">
+            {diferenciais.map((item, index) => (
+              <li key={index} className="flex items-start gap-3 justify-center">
+                <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                <span className="text-muted-foreground">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="text-center mt-8">
+            <Button onClick={() => openModal('mentorias')} size="lg" className="btn-gradient">
+              Quero Saber Mais
+            </Button>
           </div>
         </div>
 

@@ -18,7 +18,12 @@ const Navbar = () => {
   const scrollToSection = (href: string) => {
     setIsOpen(false);
     const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      const id = href.startsWith('#') ? href : `#${href}`;
+      window.location.href = `/${id}`;
+    }
   };
 
   return (
@@ -36,6 +41,7 @@ const Navbar = () => {
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
                 className="text-foreground hover:text-primary transition-colors"
+                aria-label={`Ir para ${item.label}`}
               >
                 {item.label}
               </button>
@@ -64,6 +70,7 @@ const Navbar = () => {
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
                   className="text-left text-foreground hover:text-primary transition-colors py-2"
+                  aria-label={`Ir para ${item.label}`}
                 >
                   {item.label}
                 </button>

@@ -10,8 +10,16 @@ import Footer from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SEO } from "@/components/SEO";
 import { PersonSchema, OrganizationSchema } from "@/components/SchemaMarkup";
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
   return (
     <div className="min-h-screen">
       <SEO />

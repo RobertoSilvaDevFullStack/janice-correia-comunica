@@ -17,7 +17,7 @@ const Index = () => {
       <SEO />
       <PersonSchema />
       <OrganizationSchema />
-      
+
       <Navbar />
       <Hero />
       <About />
@@ -27,7 +27,7 @@ const Index = () => {
       <Blog />
       <Testimonials />
       <Footer />
-      
+
       <WhatsAppButton />
     </div>
   );

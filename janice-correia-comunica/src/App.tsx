@@ -40,6 +40,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               
+              
               {/* Admin Routes */}
               <Route path="/admin/login" element={<Login />} />
               <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>

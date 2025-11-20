@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import Busboy from 'busboy'
-import { randomUUID } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
 import fs from 'fs'
 
@@ -9,7 +9,7 @@ const MAX_SIZE = 5 * 1024 * 1024
 
 export const uploadImage = (req: Request, res: Response) => {
   try {
-    const busboy = Busboy({ headers: req.headers })
+    const busboy = new Busboy({ headers: req.headers })
     let finished = false
 
     busboy.on('file', (name: string, file: NodeJS.ReadableStream, info: { filename: string; encoding: string; mimeType: string }) => {
@@ -23,7 +23,7 @@ export const uploadImage = (req: Request, res: Response) => {
       }
 
       const ext = info.filename.includes('.') ? info.filename.split('.').pop() : 'png'
-      const finalName = `${randomUUID()}.${ext}`
+      const finalName = `${uuidv4()}.${ext}`
       const uploadsDir = path.join(__dirname, '..', 'uploads')
       if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
       const targetPath = path.join(uploadsDir, finalName)

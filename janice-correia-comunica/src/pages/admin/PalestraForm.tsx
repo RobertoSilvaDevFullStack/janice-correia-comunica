@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { usePalestra, useCreatePalestra, useUpdatePalestra } from '@/hooks/usePalestras';
 import { toast } from 'sonner';
 import { ArrowLeft, Save, X, Plus } from 'lucide-react';
+import { ImageUploader } from '@/components/admin/ImageUploader';
 import {
   Select,
   SelectContent,
@@ -201,14 +202,16 @@ const PalestraForm = () => {
             </div>
 
             <div>
-              <Label htmlFor="image">URL da Imagem de Capa *</Label>
-              <Input
-                id="image"
-                {...register('image')}
-                placeholder="https://exemplo.com/imagem-palestra.jpg"
-              />
+              <Label htmlFor="image">Imagem de Capa *</Label>
+              <div className="mt-2">
+                <ImageUploader
+                  value={formData.image}
+                  onChange={(url) => setValue('image', url, { shouldValidate: true })}
+                  label="Imagem de capa"
+                />
+              </div>
               {errors.image && (
-                <p className="text-sm text-destructive mt-1">{errors.image.message}</p>
+                <p className="text-sm text-destructive mt-2">{errors.image.message}</p>
               )}
             </div>
           </CardContent>

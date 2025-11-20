@@ -1,4 +1,16 @@
-import { Award, BookOpen, Users, TrendingUp, Mic, MessageCircle, Handshake, Target, Sparkles, Megaphone, Lightbulb } from "lucide-react";
+import {
+  Award,
+  BookOpen,
+  Users,
+  TrendingUp,
+  Mic,
+  MessageCircle,
+  Handshake,
+  Target,
+  Sparkles,
+  Megaphone,
+  Lightbulb,
+} from "lucide-react";
 import aboutImage from "@/assets/janice-perfil.jpg";
 import historyImage from "@/assets/apresentanddo-festa-beju.png";
 
@@ -54,36 +66,61 @@ const About = () => {
               roteiros e apresentações.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            <strong className="text-primary">Seu propósito é simples:</strong>{" "}
-            ajudar pessoas e empresas a se comunicarem melhor - com clareza,
-            gentileza e impacto.
-          </p>
-          <div className="mt-8 md:mt-10 lg:mt-12">
-            <div className="flex justify-center gap-8">
-              {[{ icon: Mic, text: "Oratória e presença" }, { icon: MessageCircle, text: "Comunicação clara" }].map((item, i) => (
-                <div key={i} className="flex flex-col items-center text-center">
-                  <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
-                  <span className="text-sm md:text-base text-muted-foreground">{item.text}</span>
-                </div>
-              ))}
+              <strong className="text-primary">Seu propósito é simples:</strong>{" "}
+              ajudar pessoas e empresas a se comunicarem melhor - com clareza,
+              gentileza e impacto.
+            </p>
+            <div className="mt-8 md:mt-10 lg:mt-12">
+              <div className="flex justify-center gap-8">
+                {[
+                  { icon: Mic, text: "Oratória e presença" },
+                  { icon: MessageCircle, text: "Comunicação clara" },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
+                    <span className="text-sm md:text-base text-muted-foreground">
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
+                {[
+                  { icon: Handshake, text: "Experiência do cliente" },
+                  { icon: Target, text: "Foco em resultados" },
+                  { icon: Sparkles, text: "Evolução prática" },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
+                    <span className="text-sm md:text-base text-muted-foreground">
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
+                {[
+                  { icon: Megaphone, text: "Apresentações impactantes" },
+                  { icon: Lightbulb, text: "Ideias que conectam" },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
+                    <span className="text-sm md:text-base text-muted-foreground">
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
-              {[{ icon: Handshake, text: "Experiência do cliente" }, { icon: Target, text: "Foco em resultados" }, { icon: Sparkles, text: "Evolução prática" }].map((item, i) => (
-                <div key={i} className="flex flex-col items-center text-center">
-                  <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
-                  <span className="text-sm md:text-base text-muted-foreground">{item.text}</span>
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
-              {[{ icon: Megaphone, text: "Apresentações impactantes" }, { icon: Lightbulb, text: "Ideias que conectam" }].map((item, i) => (
-                <div key={i} className="flex flex-col items-center text-center">
-                  <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
-                  <span className="text-sm md:text-base text-muted-foreground">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
           </div>
           <div className="order-1 md:order-2">
             <img

@@ -16,7 +16,10 @@ const Navbar = () => {
     { label: "Home", href: "#home" },
     { label: "Sobre", href: "#sobre" },
     { label: "Treinamentos para empresas", href: "/treinamento-empresas" },
-    { label: "Curso particular de oratória", href: "/mentoria#mentoria-individual" },
+    {
+      label: "Curso particular de oratória",
+      href: "/mentoria#mentoria-individual",
+    },
     { label: "Depoimentos", href: "#depoimentos" },
   ];
 
@@ -30,7 +33,7 @@ const Navbar = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     } else {
-      const id = href.startsWith('#') ? href : `#${href}`;
+      const id = href.startsWith("#") ? href : `#${href}`;
       window.location.href = `/${id}`;
     }
   };
@@ -39,7 +42,10 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <a href="/#home" className="font-serif text-2xl font-bold text-primary">
+          <a
+            href="/#home"
+            className="font-serif text-2xl font-bold text-primary"
+          >
             Janice Correia
           </a>
 
@@ -50,14 +56,20 @@ const Navbar = () => {
                 key={item.label}
                 className="relative"
                 onMouseEnter={() => setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown((prev) => (prev === item.label ? null : prev))}
+                onMouseLeave={() =>
+                  setOpenDropdown((prev) => (prev === item.label ? null : prev))
+                }
               >
                 <button
                   onClick={() => scrollToSection(item.href)}
                   className="text-foreground hover:text-primary transition-colors"
                   aria-label={`Ir para ${item.label}`}
                   onFocus={() => setOpenDropdown(item.label)}
-                  onBlur={() => setOpenDropdown((prev) => (prev === item.label ? null : prev))}
+                  onBlur={() =>
+                    setOpenDropdown((prev) =>
+                      prev === item.label ? null : prev
+                    )
+                  }
                 >
                   {item.label}
                 </button>
@@ -79,8 +91,12 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button onClick={() => scrollToSection("#contato")} variant="default" size="sm">
-              Entrar em Contato
+            <Button
+              onClick={() => scrollToSection("#contato")}
+              variant="default"
+              size="sm"
+            >
+              Entrar em contato
             </Button>
           </div>
 
@@ -110,7 +126,10 @@ const Navbar = () => {
                   {item.submenu?.map((sub) => (
                     <button
                       key={sub.label}
-                      onClick={() => { setIsOpen(false); window.location.href = sub.href; }}
+                      onClick={() => {
+                        setIsOpen(false);
+                        window.location.href = sub.href;
+                      }}
                       className="ml-4 block text-left text-muted-foreground hover:text-primary transition-colors py-1 text-sm"
                       aria-label={`Ir para ${sub.label}`}
                     >
@@ -119,8 +138,12 @@ const Navbar = () => {
                   ))}
                 </div>
               ))}
-              <Button onClick={() => scrollToSection("#contato")} variant="default" className="w-full">
-                Entrar em Contato
+              <Button
+                onClick={() => scrollToSection("#contato")}
+                variant="default"
+                className="w-full"
+              >
+                Entrar em contato
               </Button>
             </div>
           </div>

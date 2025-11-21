@@ -26,6 +26,8 @@ import MentoriasList from "./pages/admin/MentoriasList";
 import MentoriaForm from "./pages/admin/MentoriaForm";
 import Settings from "./pages/admin/Settings";
 import MediaLibrary from "./pages/admin/MediaLibrary";
+import TreinamentoEmpresas from "./pages/TreinamentoEmpresas";
+import Mentoria from "./pages/Mentoria";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +45,8 @@ const App = () => (
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
               <Route path="/termos-uso" element={<TermosUso />} />
+              <Route path="/treinamento-empresas" element={<TreinamentoEmpresas />} />
+              <Route path="/mentoria" element={<Mentoria />} />
               
               
               {/* Admin Routes */}

@@ -38,7 +38,7 @@ const Mentorias = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.nome || !formData.email || !formData.mensagem) {
       toast({
         title: "Campos obrigatórios",
@@ -62,7 +62,8 @@ const Mentorias = () => {
       console.log("Lead criado:", data);
       toast({
         title: "Mensagem enviada!",
-        description: "Entraremos em contato em breve para agendar uma conversa.",
+        description:
+          "Entraremos em contato em breve para agendar uma conversa.",
       });
       setFormData({
         nome: "",
@@ -72,7 +73,9 @@ const Mentorias = () => {
         mensagem: "",
       });
     } catch (err: unknown) {
-      const msg = (err as { response?: { data?: { error?: string } } }).response?.data?.error || "Erro ao enviar mensagem";
+      const msg =
+        (err as { response?: { data?: { error?: string } } }).response?.data
+          ?.error || "Erro ao enviar mensagem";
       console.error("Falha ao criar lead:", err);
       toast({ title: "Erro", description: msg, variant: "destructive" });
     }
@@ -93,7 +96,7 @@ const Mentorias = () => {
 
         {/* Programas Disponíveis centralizados em 2 colunas x 2 linhas */}
         <div className="mb-16">
-          <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-justify">
+          <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
             Programas Disponíveis
           </h3>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">

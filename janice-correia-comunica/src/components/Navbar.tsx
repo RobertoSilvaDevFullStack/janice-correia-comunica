@@ -5,11 +5,17 @@ import { Button } from "@/components/ui/button";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const menuItems = [
+  type MenuItem = {
+    label: string;
+    href: string;
+    submenu?: { label: string; href: string }[];
+  };
+
+  const menuItems: MenuItem[] = [
     { label: "Home", href: "#home" },
     { label: "Sobre", href: "#sobre" },
-    { label: "Palestras", href: "#palestras" },
-    { label: "Mentorias", href: "#mentorias" },
+    { label: "Palestras", href: "#palestras", submenu: [{ label: "Treinamento para empresas", href: "/treinamento-empresas" }] },
+    { label: "Mentoria", href: "/mentoria" },
     { label: "Blog", href: "#blog" },
     { label: "Depoimentos", href: "#depoimentos" },
     { label: "Contato", href: "#contato" },
@@ -37,14 +43,25 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {menuItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className="text-foreground hover:text-primary transition-colors"
-                aria-label={`Ir para ${item.label}`}
-              >
-                {item.label}
-              </button>
+              <div key={item.label} className="relative group">
+                <button
+                  onClick={() => scrollToSection(item.href)}
+                  className="text-foreground hover:text-primary transition-colors"
+                  aria-label={`Ir para ${item.label}`}
+                >
+                  {item.label}
+                </button>
+                {item.submenu && (
+                  <div className="absolute left-0 mt-2 w-64 rounded-lg shadow-soft border border-border bg-background opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto">
+                    <button
+                      onClick={() => { setIsOpen(false); window.location.href = item.submenu?.[0]?.href || item.href; }}
+                      className="block w-full text-left px-4 py-3 hover:bg-muted/50 text-sm"
+                    >
+                      {item.submenu?.[0]?.label || item.label}
+                    </button>
+                  </div>
+                )}
+              </div>
             ))}
             <Button onClick={() => scrollToSection("#contato")} variant="default" size="sm">
               Entrar em Contato
@@ -75,6 +92,13 @@ const Navbar = () => {
                   {item.label}
                 </button>
               ))}
+              <button
+                onClick={() => { setIsOpen(false); window.location.href = "/treinamento-empresas"; }}
+                className="text-left text-foreground hover:text-primary transition-colors py-2"
+                aria-label="Ir para Treinamento para empresas"
+              >
+                Treinamento para empresas
+              </button>
               <Button onClick={() => scrollToSection("#contato")} variant="default" className="w-full">
                 Entrar em Contato
               </Button>

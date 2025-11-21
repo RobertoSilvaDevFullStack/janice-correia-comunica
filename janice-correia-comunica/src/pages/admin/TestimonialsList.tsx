@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTestimonials, useDeleteTestimonial } from '@/hooks/useTestimonials';
+import { useTestimonials, useDeleteTestimonial, useUpdateTestimonial } from '@/hooks/useTestimonials';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +27,7 @@ const TestimonialsList = () => {
 
   const { data: testimonials, isLoading, error } = useTestimonials('all');
   const deleteMutation = useDeleteTestimonial();
+  const updateMutation = useUpdateTestimonial();
 
   const filteredTestimonials = testimonials?.filter(t =>
     t.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -115,6 +116,38 @@ const TestimonialsList = () => {
                     <Badge variant={testimonial.status === 'approved' ? 'default' : 'secondary'}>
                       {testimonial.status === 'approved' ? 'Aprovado' : testimonial.status === 'pending' ? 'Pendente' : 'Rejeitado'}
                     </Badge>
+                    {testimonial.status !== 'approved' && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={async () => {
+                          try {
+                            await updateMutation.mutateAsync({ id: testimonial.id, status: 'approved' });
+                            toast({ title: 'Aprovado', description: 'Depoimento aprovado com sucesso.' });
+                          } catch {
+                            toast({ title: 'Erro', description: 'Não foi possível aprovar.', variant: 'destructive' });
+                          }
+                        }}
+                      >
+                        Aprovar
+                      </Button>
+                    )}
+                    {testimonial.status !== 'rejected' && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={async () => {
+                          try {
+                            await updateMutation.mutateAsync({ id: testimonial.id, status: 'rejected' });
+                            toast({ title: 'Rejeitado', description: 'Depoimento marcado como rejeitado.' });
+                          } catch {
+                            toast({ title: 'Erro', description: 'Não foi possível rejeitar.', variant: 'destructive' });
+                          }
+                        }}
+                      >
+                        Rejeitar
+                      </Button>
+                    )}
                     <Button
                       variant="ghost"
                       size="icon"

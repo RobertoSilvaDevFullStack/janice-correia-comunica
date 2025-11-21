@@ -57,33 +57,7 @@ const Testimonials = () => {
           ))}
         </div>
 
-        <div className="mt-16 bg-card p-8 rounded-lg shadow-soft text-center max-w-3xl mx-auto">
-          <h3 className="font-serif text-2xl font-bold text-primary mb-4">
-            Resultados Comprovados
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div>
-              <p className="text-4xl font-bold text-accent mb-2">500+</p>
-              <p className="text-muted-foreground">Profissionais Treinados</p>
-            </div>
-            <div>
-              <p className="text-4xl font-bold text-accent mb-2">50+</p>
-              <p className="text-muted-foreground">Empresas Atendidas</p>
-            </div>
-            <div>
-              <p className="text-4xl font-bold text-accent mb-2">98%</p>
-              <p className="text-muted-foreground">Satisfação dos Clientes</p>
-            </div>
-          </div>
-          <Button 
-            onClick={() => openModal('treinamentos')} 
-            size="lg" 
-            className="mt-8 btn-gradient"
-          >
-            <Target className="mr-2" size={20} />
-            Quero Esses Resultados
-          </Button>
-        </div>
+        
       </div>
     </section>
   );

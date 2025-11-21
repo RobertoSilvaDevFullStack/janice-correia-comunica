@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import aboutImage from "@/assets/janice-perfil.jpg";
 import historyImage from "@/assets/apresentanddo-festa-beju.png";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const About = () => {
   const achievements = [
@@ -43,7 +44,7 @@ const About = () => {
     <section id="sobre" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         {/* Sobre Janice com imagem */}
-        <div className="mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <ScrollReveal className="mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="order-2 md:order-1">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
               Sobre Janice Correia
@@ -131,9 +132,9 @@ const About = () => {
               decoding="async"
             />
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <ScrollReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {achievements.map((item, index) => (
             <div
               key={index}
@@ -146,10 +147,10 @@ const About = () => {
               <p className="text-muted-foreground">{item.description}</p>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
 
         {/* Minha história com imagem */}
-        <div className="mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <ScrollReveal className="mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div>
             <img
               src={historyImage}
@@ -205,7 +206,7 @@ const About = () => {
               <p>E eu estou aqui para caminhar com você nesse processo.</p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

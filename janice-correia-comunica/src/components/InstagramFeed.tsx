@@ -7,6 +7,7 @@ import capaEscola from "@/assets/treinamento-escola.jpg";
 import capaJr from "@/assets/treinamento-jr-distribuicao.jpg";
 import capaElilon from "@/assets/treinamento-elilon.jpg";
 import capaPlano from "@/assets/treinamento-plano.jpg";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const InstagramFeed = () => {
   // Origem das imagens: arquivos locais em `src/assets`.
@@ -82,7 +83,7 @@ const InstagramFeed = () => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <ScrollReveal className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-4">
             <Instagram className="w-8 h-8 text-accent" />
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary">
@@ -105,13 +106,13 @@ const InstagramFeed = () => {
             Seguir @janic_correia
             <ExternalLink className="ml-2" size={16} />
           </Button>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {staticPosts.map((post) => (
+          {staticPosts.map((post, idx) => (
+            <ScrollReveal key={post.id} className="relative" style={{ transitionDelay: `${idx * 120}ms` }} variant="scale">
             <div
-              key={post.id}
-              className="relative group cursor-pointer overflow-hidden rounded-lg card-hover"
+              className="group cursor-pointer overflow-hidden rounded-lg card-hover"
               onClick={() => openInstagram(post.link)}
             >
               {imageErrors[post.id] ? (
@@ -136,6 +137,7 @@ const InstagramFeed = () => {
                 </p>
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
 

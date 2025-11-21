@@ -4,6 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Quote, Star, Target } from "lucide-react";
 import { useContactModal } from "@/hooks/useContactModal";
 import { useTestimonials } from "@/hooks/useTestimonials";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const Testimonials = () => {
   const { openModal } = useContactModal();
@@ -17,18 +18,19 @@ const Testimonials = () => {
   return (
     <section id="depoimentos" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
             Depoimentos & Cases de Sucesso
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Veja o que nossos clientes têm a dizer sobre os resultados alcançados
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(testimonials || []).map((testimonial, index) => (
-            <Card key={index} className="relative card-hover">
+            <ScrollReveal key={index} className="relative" style={{ transitionDelay: `${index * 120}ms` }} variant="scale">
+            <Card className="relative card-hover">
               <CardContent className="pt-6">
                 <Quote className="w-10 h-10 text-accent/20 mb-4" />
                 <div className="flex gap-1 mb-4">
@@ -54,6 +56,7 @@ const Testimonials = () => {
                 </div>
               </CardContent>
             </Card>
+            </ScrollReveal>
           ))}
         </div>
 

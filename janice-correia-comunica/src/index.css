@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,17 +38,30 @@ All colors MUST be HSL.
     --ring: 215 60% 25%;
 
     --radius: 0.75rem;
-    
+
     /* Purple theme colors */
     --purple: 270 65% 55%;
     --purple-light: 280 60% 70%;
     --purple-dark: 265 70% 45%;
     --purple-foreground: 0 0% 100%;
-    
+
     /* Custom design tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(215 60% 25%) 0%, hsl(270 65% 55%) 50%, hsl(38 90% 60%) 100%);
-    --gradient-accent: linear-gradient(90deg, hsl(270 65% 55%) 0%, hsl(38 90% 60%) 100%);
-    --gradient-purple: linear-gradient(135deg, hsl(265 70% 45%) 0%, hsl(280 60% 70%) 100%);
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(215 60% 25%) 0%,
+      hsl(270 65% 55%) 50%,
+      hsl(38 90% 60%) 100%
+    );
+    --gradient-accent: linear-gradient(
+      90deg,
+      hsl(270 65% 55%) 0%,
+      hsl(38 90% 60%) 100%
+    );
+    --gradient-purple: linear-gradient(
+      135deg,
+      hsl(265 70% 45%) 0%,
+      hsl(280 60% 70%) 100%
+    );
     --shadow-soft: 0 4px 20px -2px hsl(215 60% 25% / 0.08);
     --shadow-medium: 0 10px 40px -5px hsl(215 60% 25% / 0.15);
     --shadow-purple: 0 10px 30px -10px hsl(270 65% 55% / 0.3);
@@ -98,10 +112,23 @@ All colors MUST be HSL.
     --border: 215 20% 25%;
     --input: 215 20% 25%;
     --ring: 38 90% 60%;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(215 40% 15%) 0%, hsl(270 55% 45%) 50%, hsl(38 80% 50%) 100%);
-    --gradient-accent: linear-gradient(90deg, hsl(270 55% 45%) 0%, hsl(38 80% 50%) 100%);
-    --gradient-purple: linear-gradient(135deg, hsl(265 60% 35%) 0%, hsl(280 50% 60%) 100%);
+
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(215 40% 15%) 0%,
+      hsl(270 55% 45%) 50%,
+      hsl(38 80% 50%) 100%
+    );
+    --gradient-accent: linear-gradient(
+      90deg,
+      hsl(270 55% 45%) 0%,
+      hsl(38 80% 50%) 100%
+    );
+    --gradient-purple: linear-gradient(
+      135deg,
+      hsl(265 60% 35%) 0%,
+      hsl(280 50% 60%) 100%
+    );
     --shadow-soft: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
     --shadow-medium: 0 10px 40px -5px hsl(0 0% 0% / 0.5);
     --shadow-purple: 0 10px 30px -10px hsl(270 55% 45% / 0.5);
@@ -123,11 +150,16 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
   }
 }
 
@@ -135,23 +167,86 @@ All colors MUST be HSL.
   .text-gradient {
     @apply bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent;
   }
-  
+
   .btn-gradient {
     background: var(--gradient-accent);
     transition: var(--transition-smooth);
   }
-  
+
   .btn-gradient:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
   }
-  
+
   .card-hover {
     transition: var(--transition-smooth);
   }
-  
+
   .card-hover:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-medium);
+  }
+
+  /* Scroll Reveal Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Scroll reveal utility classes */
+  .scroll-reveal {
+    opacity: 0;
+  }
+
+  .scroll-reveal-visible {
+    animation: fadeInUp 1.2s ease-out forwards;
   }
 }

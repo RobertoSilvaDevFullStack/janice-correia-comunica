@@ -14,6 +14,7 @@ import api from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { useContactModal } from "@/hooks/useContactModal";
 import { useMentorias } from "@/hooks/useMentorias";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const Mentorias = () => {
   const { toast } = useToast();
@@ -84,7 +85,7 @@ const Mentorias = () => {
   return (
     <section id="mentorias" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
             Mentorias e treinamentos
           </h2>
@@ -92,16 +93,17 @@ const Mentorias = () => {
             Programas personalizados para transformar sua comunicação e alcançar
             resultados extraordinários
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Programas Disponíveis centralizados em 2 colunas x 2 linhas */}
-        <div className="mb-16">
+        <ScrollReveal className="mb-16">
           <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
             Programas Disponíveis
           </h3>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {(mentorias || []).slice(0, 4).map((programa, index) => (
-              <Card key={index} className="card-hover">
+              <ScrollReveal key={index} style={{ transitionDelay: `${index * 120}ms` }}>
+              <Card className="card-hover">
                 <CardHeader>
                   <CardTitle className="font-serif text-xl text-primary text-justify">
                     {programa.title}
@@ -127,12 +129,13 @@ const Mentorias = () => {
                   </div>
                 </CardContent>
               </Card>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Nossos Diferenciais centralizados abaixo */}
-        <div className="mb-16">
+        <ScrollReveal className="mb-16">
           <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
             Nossos Diferenciais
           </h3>
@@ -155,9 +158,10 @@ const Mentorias = () => {
               Quero Saber Mais
             </Button>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <Card className="max-w-2xl mx-auto shadow-medium">
+        <ScrollReveal className="max-w-2xl mx-auto">
+        <Card className="shadow-medium">
           <CardHeader className="text-center">
             <CardTitle className="font-serif text-3xl text-primary text-center">
               Entre em contato para agendar uma conversa inicial gratuita
@@ -225,6 +229,7 @@ const Mentorias = () => {
             </form>
           </CardContent>
         </Card>
+        </ScrollReveal>
       </div>
     </section>
   );

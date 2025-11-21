@@ -6,6 +6,7 @@ import { SEO } from "@/components/SEO";
 import capaPalestras from "@/assets/janice-palestras-capa.png";
 import palestraMulheres from "@/assets/janice-palestra-mulheres.jpg";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const TreinamentoEmpresas = () => {
   return (
@@ -22,7 +23,7 @@ const TreinamentoEmpresas = () => {
           <section className="pt-24 md:pt-28 pb-12" id="treinamentos">
             <div className="max-w-7xl mx-auto px-4">
               <div className="flex flex-col md:flex-row items-center gap-10">
-                <div>
+                <ScrollReveal variant="left" threshold={0.3} durationMs={1600}>
                   <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
                     Treinamento Corporativo
                   </h1>
@@ -39,8 +40,8 @@ const TreinamentoEmpresas = () => {
                   >
                     Agendar Conversa
                   </Button>
-                </div>
-                <div className="w-full md:w-1/2">
+                </ScrollReveal>
+                <ScrollReveal className="w-full md:w-1/2" variant="right" threshold={0.3} durationMs={1600} delayMs={200}>
                   <img
                     src={palestraMulheres}
                     alt="Equipe em treinamento"
@@ -48,14 +49,14 @@ const TreinamentoEmpresas = () => {
                     loading="lazy"
                     decoding="async"
                   />
-                </div>
+                </ScrollReveal>
               </div>
             </div>
           </section>
 
           <section className="py-12">
             <div className="container mx-auto px-4">
-              <article className="prose prose-neutral max-w-none">
+              <ScrollReveal className="prose prose-neutral max-w-none" threshold={0.25} durationMs={1600}>
                 <h2
                   id="treinamentos-conteudo"
                   className="font-serif text-3xl md:text-4xl font-bold text-primary mb-6"
@@ -184,12 +185,12 @@ const TreinamentoEmpresas = () => {
                   <li>Versões para equipes grandes ou pequenos grupos.</li>
                   <li>Formatos on-line ou presenciais.</li>
                 </ul>
-              </article>
+              </ScrollReveal>
             </div>
           </section>
 
           <section className="py-12">
-            <div className="container mx-auto px-4 text-center">
+            <ScrollReveal className="container mx-auto px-4 text-center" threshold={0.25} durationMs={1600}>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-4">
                 Pronto para avançar?
               </h2>
@@ -204,7 +205,7 @@ const TreinamentoEmpresas = () => {
               >
                 Agendar Treinamento
               </Button>
-            </div>
+            </ScrollReveal>
           </section>
           <Footer />
           <WhatsAppButton />

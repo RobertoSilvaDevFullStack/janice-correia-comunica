@@ -21,7 +21,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Behind reverse proxy (EasyPanel/Nginx) so trust X-Forwarded-* to get correct https
-app.set("trust proxy", true);
+// Only enable in production to avoid rate limiter security warnings in development
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", true);
+}
 
 // Security middleware
 app.use(

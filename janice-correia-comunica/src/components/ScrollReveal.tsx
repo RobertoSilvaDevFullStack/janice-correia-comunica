@@ -9,6 +9,8 @@ interface ScrollRevealProps {
   threshold?: number;
   rootMargin?: string;
   triggerOnce?: boolean;
+  durationMs?: number;
+  delayMs?: number;
 }
 
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
@@ -19,6 +21,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   threshold = 0.1,
   rootMargin = '0px',
   triggerOnce = true,
+  durationMs = 1400,
+  delayMs,
 }) => {
   const { ref, isVisible } = useScrollReveal({ threshold, rootMargin, triggerOnce });
 
@@ -41,10 +45,14 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out ${
+      className={`transition-all ease-out ${
         isVisible ? visible : hidden
       } ${className}`}
-      style={style}
+      style={{
+        transitionDuration: `${durationMs}ms`,
+        transitionDelay: delayMs !== undefined ? `${delayMs}ms` : undefined,
+        ...style,
+      }}
     >
       {children}
     </div>

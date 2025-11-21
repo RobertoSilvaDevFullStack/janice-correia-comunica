@@ -2,6 +2,9 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactModal } from "@/hooks/useContactModal";
 import heroImage from "@/assets/janice-palestra-mulheres-capa.jpg";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 
 const Hero = () => {
   const { openModal } = useContactModal();
@@ -15,32 +18,41 @@ const Hero = () => {
     }
   };
 
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center pt-20"
     >
+      <Helmet>
+        <link rel="preload" as="image" href={heroImage} />
+      </Helmet>
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
           alt="Janice Correia - Comunicação Corporativa"
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           loading="eager"
           decoding="async"
           fetchPriority="high"
+          onLoad={() => setImgLoaded(true)}
         />
+        {!imgLoaded && (
+          <div className="w-full h-full bg-gradient-to-r from-primary/60 via-primary/40 to-primary/20" />
+        )}
         <div className="absolute inset-0 bg-gradient-to-l from-primary/95 via-primary/80 to-transparent" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 flex justify-end">
-        <div className="max-w-2xl text-white text-right">
+        <ScrollReveal className="max-w-2xl text-white text-right" variant="right" durationMs={1600}>
           <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
             Oratória e comunicação que conectam, convertem e influenciam
           </h1>
-          <p className="text-xl md:text-2xl mb-4 text-white/90">
+          <p className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in" style={{ transitionDelay: '150ms' }}>
             Especialista em oratória corporativa e comunicação Estratégica
           </p>
-          <p className="text-lg mb-8 text-white/80">
+          <p className="text-lg mb-8 text-white/80 animate-fade-in" style={{ transitionDelay: '300ms' }}>
             Treinamentos individuais e corporativos para desenvolver confiança,
             clareza e impacto - em aprresentações, reuniões e no atendimento ao
             cliente.
@@ -63,7 +75,7 @@ const Hero = () => {
               Treinamento para empresas
             </Button>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -83,7 +83,7 @@ const InstagramFeed = () => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <ScrollReveal className="text-center mb-12">
+        <ScrollReveal className="text-center mb-12" threshold={0.25} durationMs={1600}>
           <div className="inline-flex items-center gap-3 mb-4">
             <Instagram className="w-8 h-8 text-accent" />
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary">
@@ -110,7 +110,7 @@ const InstagramFeed = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {staticPosts.map((post, idx) => (
-            <ScrollReveal key={post.id} className="relative" style={{ transitionDelay: `${idx * 120}ms` }} variant="scale">
+            <ScrollReveal key={post.id} className="relative" style={{ transitionDelay: `${idx * 180}ms` }} variant="scale" threshold={0.25}>
             <div
               className="group cursor-pointer overflow-hidden rounded-lg card-hover"
               onClick={() => openInstagram(post.link)}

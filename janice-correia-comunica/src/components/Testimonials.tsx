@@ -18,7 +18,7 @@ const Testimonials = () => {
   return (
     <section id="depoimentos" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <ScrollReveal className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16" threshold={0.25} durationMs={1600}>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
             Depoimentos & Cases de Sucesso
           </h2>
@@ -29,7 +29,7 @@ const Testimonials = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(testimonials || []).map((testimonial, index) => (
-            <ScrollReveal key={index} className="relative" style={{ transitionDelay: `${index * 120}ms` }} variant="scale">
+            <ScrollReveal key={index} className="relative" style={{ transitionDelay: `${index * 180}ms` }} variant="scale" threshold={0.25}>
             <Card className="relative card-hover">
               <CardContent className="pt-6">
                 <Quote className="w-10 h-10 text-accent/20 mb-4" />

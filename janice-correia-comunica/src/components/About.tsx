@@ -44,8 +44,8 @@ const About = () => {
     <section id="sobre" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         {/* Sobre Janice com imagem */}
-        <ScrollReveal className="mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div className="order-2 md:order-1">
+        <div className="mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <ScrollReveal className="order-2 md:order-1" variant="left" threshold={0.3} durationMs={1600}>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
               Sobre Janice Correia
             </h2>
@@ -77,15 +77,12 @@ const About = () => {
                   { icon: Mic, text: "Oratória e presença" },
                   { icon: MessageCircle, text: "Comunicação clara" },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-col items-center text-center"
-                  >
+                  <ScrollReveal key={i} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 180}ms` }} variant="up" threshold={0.3}>
                     <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
                     <span className="text-sm md:text-base text-muted-foreground">
                       {item.text}
                     </span>
-                  </div>
+                  </ScrollReveal>
                 ))}
               </div>
               <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
@@ -94,15 +91,12 @@ const About = () => {
                   { icon: Target, text: "Foco em resultados" },
                   { icon: Sparkles, text: "Evolução prática" },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-col items-center text-center"
-                  >
+                  <ScrollReveal key={i} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 180}ms` }} variant="up" threshold={0.3}>
                     <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
                     <span className="text-sm md:text-base text-muted-foreground">
                       {item.text}
                     </span>
-                  </div>
+                  </ScrollReveal>
                 ))}
               </div>
               <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
@@ -110,20 +104,17 @@ const About = () => {
                   { icon: Megaphone, text: "Apresentações impactantes" },
                   { icon: Lightbulb, text: "Ideias que conectam" },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-col items-center text-center"
-                  >
+                  <ScrollReveal key={i} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 180}ms` }} variant="up" threshold={0.3}>
                     <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
                     <span className="text-sm md:text-base text-muted-foreground">
                       {item.text}
                     </span>
-                  </div>
+                  </ScrollReveal>
                 ))}
               </div>
             </div>
-          </div>
-          <div className="order-1 md:order-2">
+          </ScrollReveal>
+          <ScrollReveal className="order-1 md:order-2" variant="right" threshold={0.3} durationMs={1600} delayMs={200}>
             <img
               src={aboutImage}
               alt="Janice Correia em palestra"
@@ -131,27 +122,24 @@ const About = () => {
               loading="lazy"
               decoding="async"
             />
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
-        <ScrollReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {achievements.map((item, index) => (
-            <div
-              key={index}
-              className="bg-card p-6 rounded-lg shadow-soft hover:shadow-medium transition-all card-hover"
-            >
+            <ScrollReveal key={index} className="bg-card p-6 rounded-lg shadow-soft hover:shadow-medium transition-all card-hover" style={{ transitionDelay: `${index * 180}ms` }} variant="scale" threshold={0.2}>
               <item.icon className="w-12 h-12 text-accent mb-4" />
               <h3 className="font-serif text-xl font-semibold text-primary mb-2">
                 {item.title}
               </h3>
               <p className="text-muted-foreground">{item.description}</p>
-            </div>
+            </ScrollReveal>
           ))}
-        </ScrollReveal>
+        </div>
 
         {/* Minha história com imagem */}
-        <ScrollReveal className="mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div>
+        <div className="mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <ScrollReveal variant="left" threshold={0.3} durationMs={1600}>
             <img
               src={historyImage}
               alt="Janice Correia em mentoria"
@@ -159,8 +147,8 @@ const About = () => {
               loading="lazy"
               decoding="async"
             />
-          </div>
-          <div className="text-justify">
+          </ScrollReveal>
+          <ScrollReveal className="text-justify" variant="right" threshold={0.3} durationMs={1600} delayMs={200}>
             <h3 className="font-serif text-3xl md:text-4xl font-semibold text-primary mb-5">
               Minha história
             </h3>
@@ -205,8 +193,8 @@ const About = () => {
               </p>
               <p>E eu estou aqui para caminhar com você nesse processo.</p>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

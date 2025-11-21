@@ -85,7 +85,7 @@ const Mentorias = () => {
   return (
     <section id="mentorias" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <ScrollReveal className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16" threshold={0.25} durationMs={1600}>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
             Mentorias e treinamentos
           </h2>
@@ -96,13 +96,13 @@ const Mentorias = () => {
         </ScrollReveal>
 
         {/* Programas Disponíveis centralizados em 2 colunas x 2 linhas */}
-        <ScrollReveal className="mb-16">
+        <ScrollReveal className="mb-16" threshold={0.25} durationMs={1600}>
           <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
             Programas Disponíveis
           </h3>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {(mentorias || []).slice(0, 4).map((programa, index) => (
-              <ScrollReveal key={index} style={{ transitionDelay: `${index * 120}ms` }}>
+              <ScrollReveal key={index} style={{ transitionDelay: `${index * 180}ms` }} threshold={0.25}>
               <Card className="card-hover">
                 <CardHeader>
                   <CardTitle className="font-serif text-xl text-primary text-justify">
@@ -135,7 +135,7 @@ const Mentorias = () => {
         </ScrollReveal>
 
         {/* Nossos Diferenciais centralizados abaixo */}
-        <ScrollReveal className="mb-16">
+        <ScrollReveal className="mb-16" threshold={0.25} durationMs={1600}>
           <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
             Nossos Diferenciais
           </h3>
@@ -160,7 +160,7 @@ const Mentorias = () => {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal className="max-w-2xl mx-auto">
+        <ScrollReveal className="max-w-2xl mx-auto" threshold={0.25} durationMs={1600}>
         <Card className="shadow-medium">
           <CardHeader className="text-center">
             <CardTitle className="font-serif text-3xl text-primary text-center">

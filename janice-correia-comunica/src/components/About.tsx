@@ -18,6 +18,11 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 const About = () => {
   const achievements = [
     {
+      icon: BookOpen,
+      title: "Mestrado em Comunicação",
+      description: "Formação acadêmica sólida aliada à prática",
+    },
+    {
       icon: Award,
       title: "15+ Anos de Experiência",
       description: "Dedicados à excelência em comunicação corporativa",
@@ -27,11 +32,6 @@ const About = () => {
       title: "200+ Profissionais treinados",
       description:
         "Empresas como Engelux, Plano e Plano, Elilon Lopes Advogados e JR Distribuidora",
-    },
-    {
-      icon: BookOpen,
-      title: "Mestrado em Comunicação",
-      description: "Formação acadêmica sólida aliada à prática",
     },
     {
       icon: TrendingUp,
@@ -45,7 +45,12 @@ const About = () => {
       <div className="container mx-auto px-4">
         {/* Sobre Janice com imagem */}
         <div className="mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <ScrollReveal className="order-2 md:order-1" variant="left" threshold={0.3} durationMs={1600}>
+          <ScrollReveal
+            className="order-2 md:order-1"
+            variant="left"
+            threshold={0.3}
+            durationMs={1600}
+          >
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
               Sobre Janice Correia
             </h2>
@@ -77,7 +82,13 @@ const About = () => {
                   { icon: Mic, text: "Oratória e presença" },
                   { icon: MessageCircle, text: "Comunicação clara" },
                 ].map((item, i) => (
-                  <ScrollReveal key={i} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 180}ms` }} variant="up" threshold={0.3}>
+                  <ScrollReveal
+                    key={i}
+                    className="flex flex-col items-center text-center"
+                    style={{ transitionDelay: `${i * 180}ms` }}
+                    variant="up"
+                    threshold={0.3}
+                  >
                     <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
                     <span className="text-sm md:text-base text-muted-foreground">
                       {item.text}
@@ -88,10 +99,16 @@ const About = () => {
               <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
                 {[
                   { icon: Handshake, text: "Experiência do cliente" },
-                  { icon: Target, text: "Foco em resultados" },
+                  { icon: Megaphone, text: "Apresentações impactantes" },
                   { icon: Sparkles, text: "Evolução prática" },
                 ].map((item, i) => (
-                  <ScrollReveal key={i} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 180}ms` }} variant="up" threshold={0.3}>
+                  <ScrollReveal
+                    key={i}
+                    className="flex flex-col items-center text-center"
+                    style={{ transitionDelay: `${i * 180}ms` }}
+                    variant="up"
+                    threshold={0.3}
+                  >
                     <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
                     <span className="text-sm md:text-base text-muted-foreground">
                       {item.text}
@@ -99,22 +116,34 @@ const About = () => {
                   </ScrollReveal>
                 ))}
               </div>
-              <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
+              {/* <div className="flex justify-center gap-8 mt-10 md:mt-12 lg:mt-14">
                 {[
                   { icon: Megaphone, text: "Apresentações impactantes" },
-                  { icon: Lightbulb, text: "Ideias que conectam" },
+                  // { icon: Lightbulb, text: "Ideias que conectam" },
                 ].map((item, i) => (
-                  <ScrollReveal key={i} className="flex flex-col items-center text-center" style={{ transitionDelay: `${i * 180}ms` }} variant="up" threshold={0.3}>
+                  <ScrollReveal
+                    key={i}
+                    className="flex flex-col items-center text-center"
+                    style={{ transitionDelay: `${i * 180}ms` }}
+                    variant="up"
+                    threshold={0.3}
+                  >
                     <item.icon className="w-12 h-12 md:w-14 md:h-14 text-accent mb-3" />
                     <span className="text-sm md:text-base text-muted-foreground">
                       {item.text}
                     </span>
                   </ScrollReveal>
                 ))}
-              </div>
+              </div> */}
             </div>
           </ScrollReveal>
-          <ScrollReveal className="order-1 md:order-2" variant="right" threshold={0.3} durationMs={1600} delayMs={200}>
+          <ScrollReveal
+            className="order-1 md:order-2"
+            variant="right"
+            threshold={0.3}
+            durationMs={1600}
+            delayMs={200}
+          >
             <img
               src={aboutImage}
               alt="Janice Correia em palestra"
@@ -127,7 +156,13 @@ const About = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {achievements.map((item, index) => (
-            <ScrollReveal key={index} className="bg-card p-6 rounded-lg shadow-soft hover:shadow-medium transition-all card-hover" style={{ transitionDelay: `${index * 180}ms` }} variant="scale" threshold={0.2}>
+            <ScrollReveal
+              key={index}
+              className="bg-card p-6 rounded-lg shadow-soft hover:shadow-medium transition-all card-hover"
+              style={{ transitionDelay: `${index * 180}ms` }}
+              variant="scale"
+              threshold={0.2}
+            >
               <item.icon className="w-12 h-12 text-accent mb-4" />
               <h3 className="font-serif text-xl font-semibold text-primary mb-2">
                 {item.title}
@@ -148,7 +183,13 @@ const About = () => {
               decoding="async"
             />
           </ScrollReveal>
-          <ScrollReveal className="text-justify" variant="right" threshold={0.3} durationMs={1600} delayMs={200}>
+          <ScrollReveal
+            className="text-justify"
+            variant="right"
+            threshold={0.3}
+            durationMs={1600}
+            delayMs={200}
+          >
             <h3 className="font-serif text-3xl md:text-4xl font-semibold text-primary mb-5">
               Minha história
             </h3>

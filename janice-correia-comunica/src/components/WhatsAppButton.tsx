@@ -43,7 +43,7 @@ export const WhatsAppButton = () => {
         {/* Tooltip */}
         <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <div className="bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg whitespace-nowrap font-medium">
-            Oi! 👋 Podemos conversar?
+            Oi! 👋 Falar com Janice Correia?
             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
               <div className="border-8 border-transparent border-l-white"></div>
             </div>

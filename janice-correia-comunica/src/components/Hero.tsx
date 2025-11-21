@@ -32,7 +32,9 @@ const Hero = () => {
         <img
           src={heroImage}
           alt="Janice Correia - Comunicação Corporativa"
-          className={`w-full h-full object-cover transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`w-full h-full object-cover transition-opacity duration-700 ${
+            imgLoaded ? "opacity-100" : "opacity-0"
+          }`}
           loading="eager"
           decoding="async"
           fetchPriority="high"
@@ -45,17 +47,27 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 flex justify-end">
-        <ScrollReveal className="max-w-2xl text-white text-right" variant="right" durationMs={1600}>
+        <ScrollReveal
+          className="max-w-2xl text-white text-right"
+          variant="right"
+          durationMs={1600}
+        >
           <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
-            Oratória e comunicação que conectam, convertem e influenciam
+            Treinamentos de comunicação e oratória para profissionais e empresas
           </h1>
-          <p className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in" style={{ transitionDelay: '150ms' }}>
+          {/* <p
+            className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in"
+            style={{ transitionDelay: "150ms" }}
+          >
             Especialista em oratória corporativa e comunicação Estratégica
-          </p>
-          <p className="text-lg mb-8 text-white/80 animate-fade-in" style={{ transitionDelay: '300ms' }}>
-            Treinamentos individuais e corporativos para desenvolver confiança,
-            clareza e impacto - em aprresentações, reuniões e no atendimento ao
-            cliente.
+          </p> */}
+          <p
+            className="text-lg mb-8 text-white/80 animate-fade-in"
+            style={{ transitionDelay: "300ms" }}
+          >
+            Mentorias individuais e treinamentos corporativos de comunicação e
+            oratória para aprimorar presença, expressividade e relacionamento
+            com clientes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-end sm:justify-end">
             <Button

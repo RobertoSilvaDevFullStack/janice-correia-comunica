@@ -15,13 +15,17 @@ const Navbar = () => {
   const menuItems: MenuItem[] = [
     { label: "Home", href: "#home" },
     { label: "Sobre", href: "#sobre" },
-    { label: "Palestras", href: "#palestras", submenu: [{ label: "Treinamento para empresas", href: "/treinamento-empresas" }] },
-    { label: "Mentoria", href: "/mentoria", submenu: [{ label: "Mentoria Individual", href: "/mentoria#mentoria-individual" }] },
+    { label: "Treinamentos para empresas", href: "/treinamento-empresas" },
+    { label: "Curso particular de oratória", href: "/mentoria#mentoria-individual" },
     { label: "Depoimentos", href: "#depoimentos" },
   ];
 
   const scrollToSection = (href: string) => {
     setIsOpen(false);
+    if (href.startsWith("/") || href.startsWith("http")) {
+      window.location.href = href;
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -35,7 +39,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <a href="#home" className="font-serif text-2xl font-bold text-primary">
+          <a href="/#home" className="font-serif text-2xl font-bold text-primary">
             Janice Correia
           </a>
 

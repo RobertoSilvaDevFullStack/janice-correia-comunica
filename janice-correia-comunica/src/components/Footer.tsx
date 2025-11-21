@@ -31,7 +31,12 @@ const Footer = () => {
 
     try {
       const name = email.split("@")[0] || "Newsletter";
-      const payload = { name, email, interest: "newsletter" as const, message: "Inscrição na newsletter" };
+      const payload = {
+        name,
+        email,
+        interest: "newsletter" as const,
+        message: "Inscrição na newsletter",
+      };
       await api.post("/leads", payload);
       toast({
         title: "Inscrição realizada!",
@@ -40,7 +45,9 @@ const Footer = () => {
       setEmail("");
       setIsOpen(false);
     } catch (err: unknown) {
-      const msg = (err as { response?: { data?: { error?: string } } }).response?.data?.error || "Erro ao inscrever-se";
+      const msg =
+        (err as { response?: { data?: { error?: string } } }).response?.data
+          ?.error || "Erro ao inscrever-se";
       toast({ title: "Erro", description: msg, variant: "destructive" });
     }
   };
@@ -70,10 +77,11 @@ const Footer = () => {
             </h3>
             <p className="text-primary-foreground/80 mb-4">
               Especialista em comunicação corporativa e oratória, ajudando
-              profissionais e empresas a alcançarem resultados extraordinários.
+              profissionais e empresas a alcançarem resultados extraordinários
+              por meio da comunicação.
             </p>
             <p className="text-sm italic text-primary-foreground/70">
-              "Comunicar bem é investir nos resultados do seu negócio"
+              "Comunicar bem é investir nos seus resultados e no seu negócio"
             </p>
           </div>
 

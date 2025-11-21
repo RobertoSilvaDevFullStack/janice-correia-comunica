@@ -8,8 +8,6 @@ const url = process.env.DATABASE_URL;
 console.log("DATABASE_URL defined:", !!url);
 
 if (url) {
-  // Mask password for safety in logs
-  // Regex handles postgres://user:pass@host...
   const masked = url.replace(/(:)([^:@]+)(@)/, "$1****$3");
   console.log("DATABASE_URL (masked):", masked);
 } else {
@@ -24,10 +22,26 @@ console.log("Attempting to connect...");
 
 pool
   .connect()
-  .then((client) => {
+  .then(async (client) => {
     console.log("✅ Connected successfully!");
-    client.release();
-    pool.end();
+
+    try {
+      const res = await client.query(`
+      SELECT column_name, data_type 
+      FROM information_schema.columns 
+      WHERE table_name = 'leads';
+    `);
+
+      console.log("📋 Columns in leads table:");
+      res.rows.forEach((row) => {
+        console.log(`   - ${row.column_name} (${row.data_type})`);
+      });
+    } catch (err) {
+      console.error("❌ Error querying columns:", err.message);
+    } finally {
+      client.release();
+      pool.end();
+    }
   })
   .catch((err) => {
     console.error("❌ Connection failed:", err.message);

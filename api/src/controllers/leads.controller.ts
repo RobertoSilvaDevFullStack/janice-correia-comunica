@@ -6,7 +6,7 @@ export const createLead = async (req: Request, res: Response) => {
     const { name, email, phone, interest, message } = req.body;
 
     const result = await pool.query(
-      `INSERT INTO leads (name, email, phone, company, message, status)
+      `INSERT INTO leads (name, email, phone, interest, message, status)
        VALUES ($1, $2, $3, $4, $5, 'new')
        RETURNING *`,
       [name, email, phone, interest, message]

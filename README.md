@@ -105,25 +105,46 @@ SSL e Domínio:
 - Sem `multer` instalado por padrão (removido devido a vulnerabilidades). Adicionar apenas quando necessário com validação estrita
 
 ## Mudanças Realizadas (Changelog)
-1. Banco de Dados
-   - Adição das colunas `status` em `testimonials`, `palestras`, `mentorias`
-   - Verificação de colunas e permissões com `verify-corrections.js`
-   - Scripts de correção automatizados e testes de endpoints
-2. API
-   - Healthcheck em `/health`
-   - Testes de endpoints públicos e protegidos
-3. Frontend
-   - Ajuste de `VITE_API_URL` via `.env`
-   - Validação de rotas e integração
-4. Segurança de Dependências
-   - Remoção de `multer` e `@types/multer` devido a avisos de severidade HIGH
-5. Deploy
-   - Criação de `deploy-vps-manual.sh`, `prepare-deploy-package.sh` e guia final (`HOSTINGER_DEPLOY_GUIDE.md` já existente + instruções no README)
+
+### 2025-11-20
+- API e Uploads
+  - Adicionado endpoint `POST /api/media/upload` (multipart/form-data) com `multer`, validação de tipo e tamanho, retorno de URL pública.
+  - Exposição estática de arquivos em `/uploads` via Express.
+  - Leads: inserção resiliente ao esquema via detecção dinâmica de colunas (suporta `company`, `source`, `interest`, `message`, `status`).
+  - Testimonials: `GET /api/testimonials` agora aceita `?status=approved|pending|rejected|all` (default `approved`).
+
+- Admin (Frontend)
+  - Formulário de depoimento passou a carregar por ID (`useTestimonial(id)`) e enviar `status` na atualização; criação permanece com `pending` por padrão.
+  - Campo `avatar` tornou-se opcional (fallback visual com iniciais quando ausente).
+  - Uploader de imagem atualizado para enviar `multipart/form-data` ao novo endpoint e usar URL pública retornada.
+  - Lista de depoimentos ajustada para `useTestimonials('all')` com ações rápidas “Aprovar” e “Rejeitar”.
+
+- Site (Frontend)
+  - InstagramFeed: substituição completa de API por imagens locais de `src/assets`, com hover, indicação de clique, abertura segura do Instagram e tratamentos de erro.
+  - Navbar: criação de submenu “Treinamento para empresas” em Palestras e “Mentoria Individual” em Mentoria; comportamento de dropdown estabilizado (sem flicker) e remoção dos itens “Blog” e “Contato”.
+  - Páginas novas:
+    - `/treinamento-empresas`: página de “Treinamento Corporativo” com hero responsivo e conteúdo textual completo. Sidebar de navegação foi removida conforme orientação.
+    - `/mentoria`: página dedicada com cabeçalho, blocos de conteúdo, inscrição, seção “Mentoria Individual” e FAQ; remoção das seções “Buscar mentor” e “Calendário” conforme solicitado.
+  - Hero: botões do topo passam a navegar para `#mentorias` (curso de oratória) e `#palestras` (treinamentos) com scroll suave.
+  - Depoimentos: remoção do card “Resultados Comprovados” e CTA associado.
+  - Blog: ocultado da navegação e componentes relacionados desativados.
+
+- Correções adicionais
+  - Servir uploads e ajustar CORS para evitar erros de rede em imagens.
+  - Ajustes de layout e containers (`max-w-7xl`, flex/grid) para evitar compressão de conteúdo.
+
+### Observações e comandos úteis
+- Aprovar depoimento diretamente no banco (PostgreSQL):
+  - `UPDATE testimonials SET status='approved', updated_at=CURRENT_TIMESTAMP WHERE id='SEU_UUID';`
+  - `UPDATE testimonials SET status='approved', updated_at=CURRENT_TIMESTAMP WHERE status='pending';`
+
+- Uso do upload no Admin:
+  - Enviar um arquivo via `multipart/form-data` para `POST /api/media/upload` (requer autenticação e perfil admin). A resposta contém `{ url: "/uploads/<arquivo>" }` para uso em `avatar`.
 
 ## Próximos Passos
 - Configurar domínio e SSL
 - Popular conteúdo via painel admin
-- Adicionar uploads com validação (se necessário), revisando dependências de upload com segurança
+- Otimizar imagens (compressão/formatos modernos) e considerar upgrade do `multer` para 2.x
 
 ## Licença
 ISC

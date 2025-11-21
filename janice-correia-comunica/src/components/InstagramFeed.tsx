@@ -26,27 +26,27 @@ const InstagramFeed = () => {
     },
     {
       id: 3,
-      image: capaEscola,
-      caption:
-        "Comunicação clara é a base de qualquer relacionamento profissional 📊",
-      link: "https://www.instagram.com/janic_correia/",
-    },
-    {
-      id: 4,
       image: capaJr,
       caption: "Oratória corporativa - momento inspirador! ✨",
       link: "https://www.instagram.com/janic_correia/",
     },
     {
-      id: 5,
+      id: 4,
       image: capaElilon,
       caption: "Transformando líderes através da comunicação eficaz 🚀",
       link: "https://www.instagram.com/janic_correia/",
     },
     {
-      id: 6,
+      id: 5,
       image: capaPlano,
       caption: "Cada apresentação impacta vidas 💡",
+      link: "https://www.instagram.com/janic_correia/",
+    },
+    {
+      id: 6,
+      image: capaEscola,
+      caption:
+        "Comunicação clara é a base de qualquer relacionamento profissional 📊",
       link: "https://www.instagram.com/janic_correia/",
     },
   ];

@@ -6,6 +6,15 @@ import heroImage from "@/assets/janice-palestra-mulheres-capa.jpg";
 const Hero = () => {
   const { openModal } = useContactModal();
 
+  const goTo = (hash: string) => {
+    const el = document.querySelector(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/${hash}`;
+    }
+  };
+
   return (
     <section
       id="home"
@@ -38,7 +47,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-end sm:justify-end">
             <Button
-              onClick={() => openModal("palestras")}
+              onClick={() => goTo("#mentorias")}
               size="lg"
               className="btn-gradient text-primary-foreground font-semibold"
             >
@@ -46,7 +55,7 @@ const Hero = () => {
               <ArrowRight className="ml-2" size={20} />
             </Button>
             <Button
-              onClick={() => openModal("mentorias")}
+              onClick={() => goTo("#palestras")}
               size="lg"
               variant="outline"
               className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm"

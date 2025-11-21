@@ -1,7 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactModal } from "@/hooks/useContactModal";
-import heroImage from "@/assets/janice-palestra-mulheres-capa.jpg";
+import heroImgWebp1920 from "@/assets/janice-palestra-mulheres-capa.jpg?format=webp&w=1920";
+import heroImgWebp1280 from "@/assets/janice-palestra-mulheres-capa.jpg?format=webp&w=1280";
+import heroImgWebp720 from "@/assets/janice-palestra-mulheres-capa.jpg?format=webp&w=720";
+import heroImgJpg1280 from "@/assets/janice-palestra-mulheres-capa.jpg?w=1280";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
@@ -26,20 +29,27 @@ const Hero = () => {
       className="relative min-h-screen flex items-center pt-20"
     >
       <Helmet>
-        <link rel="preload" as="image" href={heroImage} />
+        <link rel="preload" as="image" href={heroImgWebp1280} />
       </Helmet>
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Janice Correia - Comunicação Corporativa"
-          className={`w-full h-full object-cover transition-opacity duration-700 ${
-            imgLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-          onLoad={() => setImgLoaded(true)}
-        />
+        <picture>
+          <source
+            srcSet={`${heroImgWebp720} 720w, ${heroImgWebp1280} 1280w, ${heroImgWebp1920} 1920w`}
+            type="image/webp"
+          />
+          <img
+            src={heroImgJpg1280}
+            alt="Janice Correia - Comunicação Corporativa"
+            className={`w-full h-full object-cover transition-opacity duration-700 ${
+              imgLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            sizes="(min-width: 1024px) 100vw, 100vw"
+            onLoad={() => setImgLoaded(true)}
+          />
+        </picture>
         {!imgLoaded && (
           <div className="w-full h-full bg-gradient-to-r from-primary/60 via-primary/40 to-primary/20" />
         )}

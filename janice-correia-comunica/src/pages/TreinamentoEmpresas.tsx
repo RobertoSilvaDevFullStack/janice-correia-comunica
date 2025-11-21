@@ -4,7 +4,9 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import capaPalestras from "@/assets/janice-palestras-capa.png";
-import palestraMulheres from "@/assets/janice-palestra-mulheres.jpg";
+import tCorpWebp1280 from "@/assets/janice-palestra-mulheres.jpg?format=webp&w=1280";
+import tCorpWebp720 from "@/assets/janice-palestra-mulheres.jpg?format=webp&w=720";
+import tCorpJpg1280 from "@/assets/janice-palestra-mulheres.jpg?w=1280";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
@@ -42,13 +44,17 @@ const TreinamentoEmpresas = () => {
                   </Button>
                 </ScrollReveal>
                 <ScrollReveal className="w-full md:w-1/2" variant="right" threshold={0.3} durationMs={1600} delayMs={200}>
-                  <img
-                    src={palestraMulheres}
-                    alt="Equipe em treinamento"
-                    className="w-full md:h-96 rounded-lg shadow-soft object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source srcSet={`${tCorpWebp720} 720w, ${tCorpWebp1280} 1280w`} type="image/webp" />
+                    <img
+                      src={tCorpJpg1280}
+                      alt="Equipe em treinamento"
+                      className="w-full md:h-96 rounded-lg shadow-soft object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                  </picture>
                 </ScrollReveal>
               </div>
             </div>

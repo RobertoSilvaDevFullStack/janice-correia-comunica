@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { imagetools } from "vite-imagetools";
 import path from "path";
 
 export default defineConfig(({ mode }) => ({
@@ -7,7 +8,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080, // ← Força usar a porta 8080
   },
-  plugins: [react()],
+  plugins: [react(), imagetools()],
   build: {
     cssMinify: true,
     sourcemap: false,

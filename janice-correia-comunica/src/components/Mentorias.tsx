@@ -140,7 +140,9 @@ const Mentorias = () => {
             {diferenciais.map((item, index) => (
               <li key={index} className="flex items-start gap-3 justify-center">
                 <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">{item}</span>
+                <span className="text-muted-foreground text-justify md:text-left">
+                  {item}
+                </span>
               </li>
             ))}
           </ul>

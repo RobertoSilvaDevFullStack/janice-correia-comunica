@@ -33,9 +33,13 @@ export const ImageUploader: React.FC<Props> = ({ value, onChange, label = 'Image
     if (file.size > max) return toast.error(`Arquivo excede ${maxSizeMB}MB`)
     setFileName(file.name)
     try {
-      const form = new FormData()
-      form.append('file', file)
-      const { data } = await api.post('/media/upload', form)
+      const reader = new FileReader()
+      const fileData: string = await new Promise((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = () => reject(new Error('Falha ao ler arquivo'))
+        reader.readAsDataURL(file)
+      })
+      const { data } = await api.post('/media/upload', { filename: file.name, data: fileData })
       const secureUrl = (data.url || '').replace(/^http:\/\//, 'https://')
       setPreview(secureUrl)
       onChange(secureUrl)

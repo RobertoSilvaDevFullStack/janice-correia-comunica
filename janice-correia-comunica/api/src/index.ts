@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
@@ -9,6 +10,7 @@ import leadsRoutes from "./routes/leads.routes";
 import testimonialsRoutes from "./routes/testimonials.routes";
 import palestrasRoutes from "./routes/palestras.routes";
 import mentoriasRoutes from "./routes/mentorias.routes";
+import mediaRoutes from "./routes/media.routes";
 
 dotenv.config();
 
@@ -81,6 +83,10 @@ app.use("/api/leads", leadsRoutes);
 app.use("/api/testimonials", testimonialsRoutes);
 app.use("/api/palestras", palestrasRoutes);
 app.use("/api/mentorias", mentoriasRoutes);
+app.use("/api/media", mediaRoutes);
+
+// Static files for uploaded media
+app.use("/uploads", express.static(path.resolve("uploads")));
 
 // 404 handler
 app.use((req, res) => {

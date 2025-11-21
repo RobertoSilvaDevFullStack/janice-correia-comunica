@@ -36,7 +36,7 @@ const testimonialSchema = z.object({
     .min(10, "Depoimento deve ter no mínimo 10 caracteres")
     .max(500),
   rating: z.number().min(1).max(5),
-  avatar: z.string().url("URL do avatar inválida"),
+  avatar: z.string().url("URL do avatar inválida").optional(),
 });
 
 type TestimonialFormData = z.infer<typeof testimonialSchema>;
@@ -179,7 +179,7 @@ const TestimonialForm = () => {
             </div>
 
             <div>
-              <Label>Avatar *</Label>
+              <Label>Avatar</Label>
               <ImageUploader
                 value={watch("avatar")}
                 onChange={(url) => setValue("avatar", url)}
